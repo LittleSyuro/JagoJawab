@@ -1,0 +1,9 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# Buka situs langsung ke halaman latihan
+[[redirects]]
+  from = "/"
+  to = "/latih-soal.html"
+  status = 200
