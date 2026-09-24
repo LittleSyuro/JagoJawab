@@ -59,8 +59,8 @@ h1,h2,h3{font-family:var(--display); line-height:1.15; text-wrap:balance; margin
 .label{font-size:.78rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
 .row{display:flex; flex-wrap:wrap; gap:8px; align-items:center}
 
-input[type=text]{width:100%; max-width:360px; padding:11px 14px; border:1.5px solid var(--line); border-radius:10px; background:var(--paper)}
-input[type=text]:focus{border-color:var(--acc); outline:none}
+input[type=text],input[type=password]{width:100%; max-width:360px; padding:11px 14px; border:1.5px solid var(--line); border-radius:10px; background:var(--paper)}
+input[type=text]:focus,input[type=password]:focus{border-color:var(--acc); outline:none}
 .err{color:var(--bad); font-size:.9rem}
 
 .seg{display:inline-flex; border:1.5px solid var(--line); border-radius:12px; overflow:hidden; flex-wrap:wrap}
@@ -345,7 +345,7 @@ td.catatan{white-space:normal; min-width:220px}
     <div class="brand"><h1>Latih <span class="x">Soal</span></h1><small>IPA &amp; Matematika SMP kelas 7–9</small></div>
     <nav class="tabs" role="tablist">
       <button id="tab-latihan" role="tab" aria-selected="true" data-go="home">Latihan</button>
-      <button id="tab-rekap" role="tab" aria-selected="false" data-go="rekap">Rekap nilai</button>
+      <button id="tab-rekap" role="tab" aria-selected="false" data-go="rekap">Rekap nilai 🔒</button>
     </nav>
   </header>
   <main id="app"></main>
@@ -1452,7 +1452,9 @@ async function deleteRecord(r){
 }
 
 /* ============ state & UI ============ */
-const S={screen:'home',name:ls.get(NKEY)||'',mapel:ls.get('latihsoal-mapel')==='ipa'?'ipa':'mat',kelas:[0,7,8,9].includes(+ls.get('latihsoal-kelas'))&&ls.get('latihsoal-kelas')!==null?+ls.get('latihsoal-kelas'):7,sheet:null,gantiNama:false,mode:'latihan',count:10,rekapName:'semua',rekapMapel:'semua',armed:null};
+const ADMIN_PIN = '170170';
+function isAuthed(){ return sessionStorage.getItem('rekap_pin_ok')==='1' }
+const S={screen:'home',name:ls.get(NKEY)||'',mapel:ls.get('latihsoal-mapel')==='ipa'?'ipa':'mat',kelas:[0,7,8,9].includes(+ls.get('latihsoal-kelas'))&&ls.get('latihsoal-kelas')!==null?+ls.get('latihsoal-kelas'):7,sheet:null,gantiNama:false,mode:'latihan',count:10,rekapName:'semua',rekapMapel:'semua',armed:null,pinModal:false,pinErr:''};
 let Z=null,timerId=null;
 const app=document.getElementById('app');
 function refresh(){if(S.screen==='rekap')render();else if(S.screen==='home'){if(S.name&&!S.gantiNama)render();else{const dl=document.getElementById('names');if(dl)dl.innerHTML=namesOpts()}}}
@@ -1463,10 +1465,22 @@ function fmtTime(s){s=Math.max(0,Math.round(s));const m=Math.floor(s/60),x=s%60;
 function gradeCls(v){return v>=80?'g-hi':v>=60?'g-mid':'g-lo'}
 
 function render(){setTab();
-  if(S.screen==='home')return renderHome();
-  if(S.screen==='quiz')return renderQuiz();
-  if(S.screen==='result')return renderResult();
-  if(S.screen==='rekap')return renderRekap();
+  if(S.screen==='home')renderHome();
+  else if(S.screen==='quiz')renderQuiz();
+  else if(S.screen==='result')renderResult();
+  else if(S.screen==='rekap'){
+    if(!isAuthed()){
+      S.screen='home';
+      S.pinModal=true;
+      render();
+      return;
+    }
+    renderRekap();
+  }
+  if(S.pinModal){
+    app.insertAdjacentHTML('beforeend', renderPinModal());
+    setTimeout(()=>{const inp=document.getElementById('pinInput');if(inp)inp.focus()},60);
+  }
 }
 
 const IKON={bulat:'🔢',pecahan:'🍕',perbandingan:'🗺️',aljabar:'🔤',sudut:'📐',kesebangunan:'🔺',diagram:'📊',pangkat:'⚡',pythagoras:'🪜',pl1v:'⚖️',fungsi:'🔗',garis:'📈',statistika:'📋',
@@ -1512,6 +1526,25 @@ function renderSheet(){const sh=S.sheet,tps=sh.ids.map(id=>TOPIC[id]);
     <p class="rule-mini">⚠️ Jangan pindah tab atau menutup halaman. Keluar lebih dari ${BATAS_KELUAR} detik = nilai 0.</p>
     <button class="btn primary wide" id="start">Mulai ${nq} soal${S.mode==='ujian'?` · ${mins} menit`:''}</button></div>`}
 function bukaSheet(ids,title,ikon,sub){S.sheet={ids,title,ikon,sub};render();setTimeout(()=>document.getElementById('start')?.focus(),60)}
+
+function renderPinModal(){
+  return `<div class="backdrop" data-pinclose="1"></div><div class="bsheet" role="dialog" aria-modal="true" aria-labelledby="pinTitle" style="max-width:380px;text-align:center;padding:22px 20px calc(20px + env(safe-area-inset-bottom,0px))">
+    <div class="grip" aria-hidden="true"></div>
+    <div style="font-size:2.8rem;line-height:1;margin:8px 0 4px">🔐</div>
+    <h3 id="pinTitle" style="font-size:1.35rem;font-weight:800;margin:0">Akses Khusus Mas Syuro</h3>
+    <p class="hint" style="margin:6px 0 16px;font-size:0.92rem">Halaman rekap nilai dikunci. Masukkan PIN untuk membuka.</p>
+    <form id="fPin" style="display:grid;gap:12px;width:100%">
+      <div>
+        <input type="password" id="pinInput" maxlength="10" placeholder="••••••" inputmode="numeric" autocomplete="current-password"
+          style="text-align:center;font-size:1.6rem;letter-spacing:8px;font-family:var(--mono);padding:10px 14px;width:100%;max-width:220px;margin:0 auto" required autofocus>
+        ${S.pinErr?`<div class="err" style="margin-top:8px;font-weight:700">${esc(S.pinErr)}</div>`:''}
+      </div>
+      <div class="row" style="justify-content:center;gap:10px;margin-top:4px">
+        <button type="button" class="btn ghost" data-pinclose="1" style="flex:1">Batal</button>
+        <button type="submit" class="btn acc" style="flex:1">Buka Rekap</button>
+      </div>
+    </form>
+  </div>`}
 
 function startQuiz(){
   const nm=S.name.trim();if(!nm){S.gantiNama=true;render();return}
@@ -1638,9 +1671,17 @@ function renderRekap(){
   const d=iso=>{const x=new Date(iso);return x.toLocaleDateString('id-ID',{day:'numeric',month:'short'})+' '+x.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})};
   const rows=rs.slice(0,100).map((r,i)=>`<tr><td>${d(r.waktu)}</td><td>${esc(r.nama)}</td><td><span class="tag ${r.mapel}">${MAPEL[r.mapel]}</span></td><td>${r.mode==='ujian'?'Ujian':'Latihan'}</td><td><span class="grade ${gradeCls(r.skor)}">${r.skor}</span>${r.catatan?' <span aria-hidden="true">⚠️</span>':''}</td><td class="num">${r.benar}/${r.total}</td><td class="num">${fmtTime(r.detik)}</td><td class="catatan">${r.catatan?`<span class="flag">${esc(r.catatan)}</span>`:''}</td><td><button class="del ${S.armed===r.id?'arm':''}" data-del="${esc(r.id)}">${S.armed===r.id?'Yakin hapus?':'Hapus'}</button></td></tr>`).join('');
   app.innerHTML=`<section class="sheet">
-    <div class="row" style="justify-content:space-between"><h2 style="font-size:1.4rem;font-weight:800">Rekap nilai</h2>
-      <div class="row"><select id="rkName" aria-label="Pilih nama"><option value="semua">Semua anak</option>${nm.map(n=>`<option value="${esc(n)}" ${S.rekapName===n?'selected':''}>${esc(n)}</option>`).join('')}</select>
-      <select id="rkMapel" aria-label="Pilih mapel"><option value="semua">Semua mapel</option><option value="mat" ${S.rekapMapel==='mat'?'selected':''}>Matematika</option><option value="ipa" ${S.rekapMapel==='ipa'?'selected':''}>IPA</option></select></div></div>
+    <div class="row" style="justify-content:space-between;align-items:center;gap:12px">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <h2 style="font-size:1.4rem;font-weight:800">Rekap nilai</h2>
+        <span class="pill" style="font-size:0.78rem">👤 Mas Syuro (Admin)</span>
+      </div>
+      <div class="row" style="align-items:center;gap:8px">
+        <button class="btn ghost" id="lockRekap" style="font-size:0.85rem;padding:6px 12px">🔒 Kunci Rekap</button>
+        <select id="rkName" aria-label="Pilih nama"><option value="semua">Semua anak</option>${nm.map(n=>`<option value="${esc(n)}" ${S.rekapName===n?'selected':''}>${esc(n)}</option>`).join('')}</select>
+        <select id="rkMapel" aria-label="Pilih mapel"><option value="semua">Semua mapel</option><option value="mat" ${S.rekapMapel==='mat'?'selected':''}>Matematika</option><option value="ipa" ${S.rekapMapel==='ipa'?'selected':''}>IPA</option></select>
+      </div>
+    </div>
     ${storeMode==='lokal'?'<p class="note">Rekap tersimpan di perangkat ini saja.</p>':''}
     ${rs.length?`<div class="sec"><div class="tiles">
       <div class="tile"><div class="v">${rs.length}</div><div class="t">kali latihan</div></div>
@@ -1654,8 +1695,15 @@ function renderRekap(){
 }
 
 /* ============ events ============ */
-document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
-  if(b.dataset.go){if(S.screen==='quiz'&&b.dataset.go!=='quiz'){ if(!confirmLeave())return }S.screen=b.dataset.go;S.armed=null;render();window.scrollTo(0,0);return}
+document.addEventListener('click',e=>{const b=e.target.closest('button');
+  if(e.target.dataset.pinclose || (b && b.dataset.pinclose)){S.pinModal=false;S.pinErr='';render();return}
+  if(b && b.id==='lockRekap'){sessionStorage.removeItem('rekap_pin_ok');S.screen='home';S.armed=null;render();window.scrollTo(0,0);return}
+  if(!b)return;
+  if(b.dataset.go){
+    if(S.screen==='quiz'&&b.dataset.go!=='quiz'){ if(!confirmLeave())return }
+    if(b.dataset.go==='rekap'&&!isAuthed()){ S.pinModal=true; S.pinErr=''; render(); return }
+    S.screen=b.dataset.go;S.armed=null;render();window.scrollTo(0,0);return
+  }
   if(S.screen==='home'){
     if(b.dataset.close){S.sheet=null;render();return}
     if(b.id==='gantiNama'){S.gantiNama=true;render();return}
@@ -1695,10 +1743,39 @@ function confirmLeave(){if(leaveArmed){leaveArmed=false;clearInterval(timerId);i
   leaveArmed=true;const f=app.querySelector('.qfoot');if(f&&!document.getElementById('leaveNote')){const n=document.createElement('div');n.className='confirm';n.id='leaveNote';n.innerHTML=`<span>Latihan belum selesai. Kalau keluar sekarang, nilainya dicatat <b>0</b>. ${Z&&Z.mode==='latihan'?'Pakai tombol <b>Akhiri latihan</b> untuk menyimpan nilai soal yang sudah dijawab. ':''}Klik tab sekali lagi untuk tetap keluar.</span>`;f.after(n)}
   setTimeout(()=>{leaveArmed=false},5000);return false}
 document.addEventListener('change',e=>{if(e.target.id==='rkName'){S.rekapName=e.target.value;render()}if(e.target.id==='rkMapel'){S.rekapMapel=e.target.value;render()}});
-document.addEventListener('submit',e=>{if(e.target.id!=='fNama')return;e.preventDefault();const v=document.getElementById('nama').value.trim();if(!v)return;
-  S.name=v;S.gantiNama=false;ls.set(NKEY,v);render();window.scrollTo(0,0)});
-document.addEventListener('click',e=>{if(S.screen==='home'&&S.sheet&&e.target.classList.contains('backdrop')){S.sheet=null;render()}});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&S.screen==='home'&&S.sheet){S.sheet=null;render()}});
+document.addEventListener('submit',e=>{
+  if(e.target.id==='fPin'){
+    e.preventDefault();
+    const v=(document.getElementById('pinInput')?.value||'').trim();
+    if(v===ADMIN_PIN){
+      sessionStorage.setItem('rekap_pin_ok','1');
+      S.pinModal=false;
+      S.pinErr='';
+      S.screen='rekap';
+      render();
+      window.scrollTo(0,0);
+    }else{
+      S.pinErr='PIN salah. Akses khusus Mas Syuro.';
+      render();
+      const inp=document.getElementById('pinInput');
+      if(inp){inp.focus();inp.select()}
+    }
+    return;
+  }
+  if(e.target.id!=='fNama')return;
+  e.preventDefault();const v=document.getElementById('nama').value.trim();if(!v)return;
+  S.name=v;S.gantiNama=false;ls.set(NKEY,v);render();window.scrollTo(0,0);
+});
+document.addEventListener('click',e=>{
+  if(S.pinModal&&e.target.classList.contains('backdrop')){S.pinModal=false;S.pinErr='';render();return}
+  if(S.screen==='home'&&S.sheet&&e.target.classList.contains('backdrop')){S.sheet=null;render()}
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    if(S.pinModal){S.pinModal=false;S.pinErr='';render();return}
+    if(S.screen==='home'&&S.sheet){S.sheet=null;render();return}
+  }
+});
 document.addEventListener('keydown',e=>{if(S.screen!=='quiz'||e.target.tagName==='INPUT')return;const k=e.key.toLowerCase();
   const map={'1':0,'2':1,'3':2,'4':3,a:0,b:1,c:2,d:3};
   if(k in map&&!(Z.mode==='latihan'&&Z.ansr[Z.i]!==null)){answer(map[k]);return}
