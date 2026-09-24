@@ -1,11 +1,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
 <title>Latih Soal SMP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
 :root{
+  color-scheme: light;
   --paper:#f3f6fa; --grid:#e3e9f2; --card:#ffffff; --ink:#15203a; --muted:#56637d; --line:#d5dce8;
   --mat:#2f4fd8; --mat-soft:#e6ebff; --ipa:#0b8566; --ipa-soft:#dcf3ea;
   --hl:#ffd23f; --hl-ink:#3b2f00; --ok:#16864a; --ok-soft:#dcf2e4; --bad:#c9372c; --bad-soft:#fbe3e0;
@@ -13,20 +15,6 @@
   --display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
   --body:"Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    color-scheme:dark;
-    --paper:#0e1320; --grid:#161d2e; --card:#161d2c; --ink:#e7ecf6; --muted:#9aa6bf; --line:#2a3550;
-    --mat:#8aa0ff; --mat-soft:#1f2850; --ipa:#43d0a6; --ipa-soft:#123a30;
-    --hl:#ffd23f; --hl-ink:#2b2200; --ok:#4fd08a; --ok-soft:#133526; --bad:#ff7b6e; --bad-soft:#3d1a18;
-  }
-}
-:root[data-theme="dark"]{
-  color-scheme:dark;
-  --paper:#0e1320; --grid:#161d2e; --card:#161d2c; --ink:#e7ecf6; --muted:#9aa6bf; --line:#2a3550;
-  --mat:#8aa0ff; --mat-soft:#1f2850; --ipa:#43d0a6; --ipa-soft:#123a30;
-  --hl:#ffd23f; --hl-ink:#2b2200; --ok:#4fd08a; --ok-soft:#133526; --bad:#ff7b6e; --bad-soft:#3d1a18;
 }
 body[data-mapel="ipa"]{--acc:var(--ipa); --acc-soft:var(--ipa-soft);}
 *{box-sizing:border-box}
@@ -69,8 +57,6 @@ input[type=text]:focus,input[type=password]:focus{border-color:var(--acc); outli
 .seg button[aria-pressed="true"]{background:var(--acc); color:#fff}
 body[data-mapel] .seg.mapel button[data-v="mat"][aria-pressed="true"]{background:var(--mat)}
 body[data-mapel] .seg.mapel button[data-v="ipa"][aria-pressed="true"]{background:var(--ipa)}
-:root[data-theme="dark"] .seg button[aria-pressed="true"]{color:#0e1320}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .seg button[aria-pressed="true"]{color:#0e1320}}
 .hint{color:var(--muted); font-size:.9rem}
 
 .group{display:grid; gap:8px}
@@ -91,8 +77,6 @@ body[data-mapel] .seg.mapel button[data-v="ipa"][aria-pressed="true"]{background
 .btn.primary{background:var(--hl); color:var(--hl-ink)}
 .btn.ghost{background:transparent; border:1.5px solid var(--line); color:var(--ink)}
 .btn.acc{background:var(--acc); color:#fff}
-:root[data-theme="dark"] .btn.acc{color:#0e1320}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.acc{color:#0e1320}}
 .btn:disabled{opacity:.45; cursor:not-allowed}
 
 /* quiz */
@@ -210,8 +194,6 @@ select{padding:9px 12px; border-radius:10px; border:1.5px solid var(--line); bac
 .fig .tagc{fill:var(--hl); stroke:var(--ink); stroke-width:1.5}
 .fig .heart{fill:#f6c9c4; stroke:#b8433a; stroke-width:2}
 .fig .vessel{fill:none; stroke:#b8433a; stroke-width:9; stroke-linecap:round; opacity:.75}
-:root[data-theme="dark"] .fig .heart{fill:#4a2522}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .fig .heart{fill:#4a2522}}
 .hias .bg{fill:var(--card); stroke:var(--acc); stroke-width:1.5}
 .hias .bub{fill:var(--card); stroke:var(--acc); stroke-width:1.2}
 .hias .sym{font-family:var(--display); font-size:22px; font-weight:800; fill:var(--acc)}
