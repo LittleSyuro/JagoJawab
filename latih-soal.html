@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
-<title>Latih Soal SMP</title>
+<title>Latihan Soal SMP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap">
@@ -320,17 +320,453 @@ td.catatan{white-space:normal; min-width:220px}
   .sheet{padding:16px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+
+/* ============ proteksi anti-screenshot, print, & copy ============ */
+@media print {
+  html, body { display: none !important; visibility: hidden !important; }
+}
+.sheet-quiz {
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.quiz-wm {
+  position: absolute;
+  inset: -40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-auto-rows: 90px;
+  gap: 20px;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.055;
+  transform: rotate(-14deg);
+  z-index: 0;
+  overflow: hidden;
+}
+.quiz-wm span {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.sheet-quiz > *:not(.quiz-wm) {
+  position: relative;
+  z-index: 1;
+}
+.screen-shield {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.94);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .15s ease;
+}
+.screen-shield.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.shield-card {
+  max-width: 440px;
+  width: 100%;
+  background: #1e293b;
+  color: #f8fafc;
+  border: 1.5px solid rgba(255,255,255,0.14);
+  border-radius: 18px;
+  padding: 28px 24px;
+  text-align: center;
+  box-shadow: 0 24px 48px rgba(0,0,0,0.55);
+}
+.shield-icon {
+  font-size: 2.8rem;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+.shield-card h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 8px;
+}
+.shield-card p {
+  font-size: 0.92rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0 0 18px;
+}
+
+/* ============ SOFIYAH ACL #11 SECTION ============ */
+.tabs button#tab-sofiyah {
+  color: #b45309;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.tabs button#tab-sofiyah[aria-selected="true"] {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.35);
+}
+
+.sofiyah-hero-card {
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border: 2px solid #f59e0b;
+  border-radius: 18px;
+  padding: 22px 24px;
+  color: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  box-shadow: 0 10px 25px rgba(245, 158, 11, 0.15);
+}
+.shc-badge {
+  display: inline-block;
+  background: #f59e0b;
+  color: #451a03;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+.shc-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 6px;
+}
+.shc-desc {
+  color: #cbd5e1;
+  font-size: 0.92rem;
+  margin: 0;
+  max-width: 540px;
+  line-height: 1.45;
+}
+.shc-btn {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #ffffff;
+  font-weight: 800;
+  padding: 13px 24px;
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.shc-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(217, 119, 6, 0.5);
+}
+
+.sofi-sheet {
+  display: grid;
+  gap: 20px;
+}
+.sofi-head-banner {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 1.5px solid #f59e0b;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.sofi-head-banner h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #78350f;
+  margin: 4px 0 6px;
+}
+.sofi-head-banner p {
+  margin: 0;
+  color: #92400e;
+  font-size: 0.95rem;
+}
+.sofi-tag-gold {
+  background: #f59e0b;
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.acl-rules-card {
+  background: #ffffff;
+  border: 1.5px solid var(--line);
+  border-radius: 16px;
+  padding: 18px 20px;
+  display: grid;
+  gap: 14px;
+}
+.arc-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.arc-head h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.arc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+.arc-box {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 0.88rem;
+}
+.arc-box b.title {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--ink);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.arc-box ul {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 4px;
+  color: var(--muted);
+}
+.arc-box ul li b {
+  color: var(--ink);
+}
+.rule-toggle-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 14px 16px;
+  background: var(--paper);
+  border-radius: 12px;
+  border: 1px dashed var(--line);
+}
+
+.sofi-pkgs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.sofi-pkg-card {
+  background: #ffffff;
+  border: 2px solid var(--line);
+  border-radius: 16px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+  position: relative;
+  overflow: hidden;
+}
+.sofi-pkg-card:hover {
+  transform: translateY(-3px);
+  border-color: #f59e0b;
+  box-shadow: 0 8px 20px rgba(245, 158, 11, 0.12);
+}
+.sofi-pkg-card.mat {
+  border-top: 5px solid var(--mat);
+}
+.sofi-pkg-card.ipa {
+  border-top: 5px solid var(--ipa);
+}
+.spc-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.spc-icon-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.spc-icon {
+  font-size: 2rem;
+  line-height: 1;
+  flex: none;
+  background: var(--paper);
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+}
+.spc-info h4 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin: 0 0 4px;
+  line-height: 1.3;
+}
+.spc-sub {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.4;
+}
+.spc-kisi {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.83rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.spc-kisi b {
+  color: var(--ink);
+  display: block;
+  margin-bottom: 2px;
+  font-size: 0.82rem;
+}
+.spc-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+}
+.spc-badge-best {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ok);
+  background: var(--ok-soft);
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+.spc-btn {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #fff;
+  font-weight: 800;
+  padding: 9px 16px;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  border: none;
+  cursor: pointer;
+}
+.spc-btn:hover {
+  filter: brightness(1.08);
+}
+
+/* ACL result scorecard */
+.acl-result-banner {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  color: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 18px;
+  border: 2px solid #f59e0b;
+}
+.arb-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.arb-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #f59e0b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.arb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  text-align: center;
+}
+.arb-box {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 10px;
+}
+.arb-box .v {
+  font-family: var(--mono);
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #ffffff;
+}
+.arb-box .v.gold { color: #f59e0b; }
+.arb-box .v.ok { color: #34d399; }
+.arb-box .v.bad { color: #f87171; }
+.arb-box .t {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.arb-predikat {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #fef3c7;
+  font-size: 0.92rem;
+  text-align: center;
+}
+
 </style>
 
 <div class="wrap">
   <header class="top">
-    <div class="brand"><h1>Latih <span class="x">Soal</span></h1><small>IPA &amp; Matematika SMP kelas 7–9</small></div>
+    <div class="brand"><h1>Latihan <span class="x">Soal</span></h1><small>IPA &amp; Matematika SMP kelas 7–9</small></div>
     <nav class="tabs" role="tablist">
       <button id="tab-latihan" role="tab" aria-selected="true" data-go="home">Latihan</button>
       <button id="tab-rekap" role="tab" aria-selected="false" data-go="rekap">Rekap nilai 🔒</button>
     </nav>
   </header>
   <main id="app"></main>
+</div>
+
+<div id="screenShield" class="screen-shield" aria-hidden="true">
+  <div class="shield-card">
+    <div class="shield-icon">🛡️</div>
+    <h3>Layar Disembunyikan</h3>
+    <p>Demi integritas latihan &amp; keamanan soal, tampilan disamarkan saat jendela tidak aktif atau saat membuka alat screenshot.</p>
+    <button class="btn acc" id="btnShieldFocus">Klik untuk Kembali Latihan</button>
+  </div>
 </div>
 
 <script>
@@ -1433,16 +1869,25 @@ async function deleteRecord(r){
   try{await db.doc('hasil/'+r.id).delete()}catch{}
 }
 
+
+/* ============ 6 PAKET SOAL KHUSUS SOFIYAH (ACL #11) ============ */
+const PAKET_SOFIYAH = [{"title":"Paket 1: Matematika ACL #11 (Bilangan, Basis & Aljabar)","sub":"Fokus Teori Bilangan, Keterbagian, Modulo, Himpunan & Aljabar","kisi":"Operasi bilangan bulat & pecahan, FPB & KPK, Basis bilangan (biner/basis 5), Modulo & sisa pembagian, Himpunan, Fungsi aljabar & kuadrat, SPLDV, Barisan & deret.","mapel":"mat","icon":"🔢","qs":[{"q":"Hasil dari (-18 + 12 × (-3)) : (-6) - (-15) adalah …","a":"24","d":["-24","6","15"],"e":"Dahulukan perkalian: 12 × (-3) = -36. Lalu -18 + (-36) = -54. Kemudian pembagian: -54 : (-6) = 9. Terakhir: 9 - (-15) = 9 + 15 = 24."},{"q":"Nilai dalam basis 10 (desimal) dari bilangan biner 11011₂ adalah …","a":"27","d":["25","29","31"],"e":"11011₂ = (1 × 2⁴) + (1 × 2³) + (0 × 2²) + (1 × 2¹) + (1 × 2⁰) = 16 + 8 + 0 + 2 + 1 = 27."},{"q":"Bilangan desimal 43 jika dinyatakan dalam bilangan basis 5 adalah …","a":"133₅","d":["123₅","143₅","233₅"],"e":"Bagi 43 dengan 5: 43 : 5 = 8 sisa 3. Lalu 8 : 5 = 1 sisa 3. Terakhir 1 : 5 = 0 sisa 1. Membaca sisa dari bawah ke atas diperoleh 133₅."},{"q":"Sisa pembagian 3²⁰²⁶ jika dibagi oleh 8 adalah …","a":"1","d":["3","5","7"],"e":"Perhatikan pola: 3¹ = 3, 3² = 9 ≡ 1 (mod 8). Karena pangkat 2026 adalah bilangan genap, maka 3²⁰²⁶ = (3²)¹⁰¹³ ≡ 1¹⁰¹³ ≡ 1 (mod 8). Jadi sisanya adalah 1."},{"q":"Dua lampu hias berkedip dengan interval berbeda. Lampu merah menyala setiap 18 detik dan lampu hijau setiap 24 detik. Jika kedua lampu menyala bersamaan pada pukul 08.00.00, pada pukul berapa kedua lampu akan menyala bersamaan untuk ketiga kalinya?","a":"08.02.24","d":["08.01.12","08.03.36","08.02.12"],"e":"KPK dari 18 dan 24 adalah 72 detik. Menyala bersamaan ke-1 pada t = 0 (08.00.00), ke-2 pada t = 72 detik, dan ke-3 pada t = 2 × 72 = 144 detik = 2 menit 24 detik, yaitu pukul 08.02.24."},{"q":"Bentuk sederhana dari (√50 - √18) / (√32 + √8) adalah …","a":"1/3","d":["1/2","2/3","1/4"],"e":"√50 = 5√2, √18 = 3√2 → pembilang = 5√2 - 3√2 = 2√2. √32 = 4√2, √8 = 2√2 → penyebut = 4√2 + 2√2 = 6√2. Hasil = 2√2 / 6√2 = 1/3."},{"q":"Bentuk rasional dari 6 / (√5 - √2) adalah …","a":"2√5 + 2√2","d":["2√5 - 2√2","3√5 + 3√2","6√5 + 6√2"],"e":"Kalikan dengan sekawan: 6(√5 + √2) / (5 - 2) = 6(√5 + √2) / 3 = 2(√5 + √2) = 2√5 + 2√2."},{"q":"Suatu bilangan bulat positif n bersisa 3 jika dibagi 5, dan bersisa 2 jika dibagi 7. Bilangan terkecil n > 0 yang memenuhi adalah …","a":"23","d":["13","18","37"],"e":"Bilangan bersisa 3 jika dibagi 5: 3, 8, 13, 18, 23, 28, ... Dari bilangan tersebut, 23 dibagi 7 menghasilkan 3 sisa 2 (23 = 7 × 3 + 2). Jadi nilai n terkecil adalah 23."},{"q":"Dari 40 siswa peserta bimbingan, 25 siswa memilih Matematika, 20 siswa memilih IPA, dan 4 siswa tidak memilih keduanya. Banyak siswa yang memilih kedua mata pelajaran tersebut adalah …","a":"9 orang","d":["7 orang","11 orang","15 orang"],"e":"Siswa yang memilih setidaknya satu mapel = 40 - 4 = 36 orang. n(M ∩ I) = n(M) + n(I) - n(M ∪ I) = 25 + 20 - 36 = 9 orang."},{"q":"Diketahui S = {x | 1 ≤ x ≤ 12, x ∈ bilangan asli}, A = {x | x bilangan prima ≤ 12}, dan B = {x | x bilangan ganjil ≤ 12}. Komplemen dari (A ∩ B) adalah …","a":"{1, 2, 4, 6, 8, 9, 10, 12}","d":["{1, 2, 4, 6, 8, 10, 12}","{2, 4, 6, 8, 10, 12}","{1, 4, 6, 8, 9, 10, 12}"],"e":"A = {2, 3, 5, 7, 11}, B = {1, 3, 5, 7, 9, 11}. A ∩ B = {3, 5, 7, 11}. Komplemen terhadap S adalah anggota S yang bukan di {3, 5, 7, 11}, yaitu {1, 2, 4, 6, 8, 9, 10, 12}."},{"q":"Jika a + b = 7 dan a × b = 10, maka nilai dari a² + b² adalah …","a":"29","d":["39","49","19"],"e":"a² + b² = (a + b)² - 2ab = 7² - 2(10) = 49 - 20 = 29."},{"q":"Nilai dari (2026² - 2024²) / 2025 adalah …","a":"4","d":["2","8","2025"],"e":"Faktorkan selisih kuadrat: (2026 - 2024)(2026 + 2024) / 2025 = (2)(4050) / 2025 = 2 × 2 = 4."},{"q":"Suatu fungsi linear f dirumuskan dengan f(x) = ax + b. Jika f(2) = 11 dan f(-1) = 2, rumus fungsi f(x) adalah …","a":"f(x) = 3x + 5","d":["f(x) = 3x - 5","f(x) = 2x + 7","f(x) = 4x + 3"],"e":"2a + b = 11 dan -a + b = 2. Kurangkan: 3a = 9 → a = 3. Maka b = 2 + 3 = 5. Jadi f(x) = 3x + 5."},{"q":"Titik puncak (titik balik) dari grafik fungsi kuadrat y = x² - 6x + 5 adalah …","a":"(3, -4)","d":["(3, 4)","(-3, -4)","(6, 5)"],"e":"xp = -b / (2a) = -(-6) / (2 × 1) = 3. yp = 3² - 6(3) + 5 = 9 - 18 + 5 = -4. Jadi titik puncak adalah (3, -4)."},{"q":"Domain (daerah asal alami) dari fungsi rasional f(x) = (2x + 1) / (x² - 9) pada himpunan bilangan real adalah …","a":"{x | x ≠ 3 dan x ≠ -3, x ∈ ℝ}","d":["{x | x ≠ 3, x ∈ ℝ}","{x | x ≠ 9, x ∈ ℝ}","{x | x > 3, x ∈ ℝ}"],"d2":["{x | x ≠ 9, x ∈ ℝ}","{x | x > 3, x ∈ ℝ}"],"e":"Penyebut pecahan tidak boleh bernilai nol: x² - 9 ≠ 0 → x² ≠ 9 → x ≠ 3 dan x ≠ -3."},{"q":"Himpunan penyelesaian dari pertidaksamaan (2x - 3)/4 - (x + 1)/3 ≥ 1 untuk x ∈ ℝ adalah …","a":"x ≥ 12,5","d":["x ≤ 12,5","x ≥ 25","x ≤ 25"],"e":"Kalikan kedua ruas dengan 12: 3(2x - 3) - 4(x + 1) ≥ 12 → 6x - 9 - 4x - 4 ≥ 12 → 2x - 13 ≥ 12 → 2x ≥ 25 → x ≥ 12,5."},{"q":"Keliling sebuah persegi panjang adalah 48 cm. Jika panjangnya 4 cm lebih dari lebarnya, luas persegi panjang tersebut adalah …","a":"140 cm²","d":["120 cm²","144 cm²","160 cm²"],"e":"K = 2(p + l) = 48 → p + l = 24. Diketahui p - l = 4. Jumlahkan: 2p = 28 → p = 14 cm dan l = 10 cm. Luas = p × l = 14 × 10 = 140 cm²."},{"q":"Diketahui sistem persamaan 1/x + 1/y = 5/6 dan 1/x - 1/y = 1/6. Nilai dari x + y adalah …","a":"5","d":["6","7","4"],"e":"Jumlahkan: 2/x = 6/6 = 1 → x = 2. Kurangkan: 2/y = 4/6 = 2/3 → y = 3. Maka x + y = 2 + 3 = 5."},{"q":"Suku ke-4 suatu barisan aritmetika adalah 17 dan suku ke-9 adalah 37. Suku ke-20 barisan tersebut adalah …","a":"81","d":["77","85","89"],"e":"U9 - U4 = 5b = 37 - 17 = 20 → beda b = 4. Suku pertama: a + 3(4) = 17 → a = 5. U20 = a + 19b = 5 + 19(4) = 5 + 76 = 81."},{"q":"Jumlah 25 suku pertama dari deret aritmetika 3 + 7 + 11 + 15 + … adalah …","a":"1.275","d":["1.250","1.300","1.225"],"e":"a = 3, b = 4, n = 25. S25 = (25/2) × [2(3) + (25 - 1)4] = (25/2) × [6 + 96] = (25/2) × 102 = 25 × 51 = 1.275."},{"q":"Suku ke-3 suatu barisan geometri adalah 18 dan suku ke-6 adalah 486. Suku pertama barisan tersebut adalah …","a":"2","d":["3","6","1"],"e":"U6 / U3 = r³ = 486 / 18 = 27 → rasio r = 3. U3 = ar² = a(3²) = 9a = 18 → a = 2."},{"q":"Sebuah bola dijatuhkan dari ketinggian 12 meter dan memantul tegak lurus dengan ketinggian 2/3 dari ketinggian sebelumnya. Panjang seluruh lintasan bola hingga berhenti adalah …","a":"60 meter","d":["48 meter","72 meter","36 meter"],"e":"Panjang lintasan = h × (1 + r) / (1 - r) = 12 × (1 + 2/3) / (1 - 2/3) = 12 × (5/3) / (1/3) = 12 × 5 = 60 meter."},{"q":"Tiga suku berikutnya dari barisan bilangan 2, 5, 10, 17, 26, … adalah …","a":"37, 50, 65","d":["35, 48, 63","37, 49, 64","36, 49, 64"],"e":"Pola suku ke-n adalah Un = n² + 1. Suku ke-6 = 6² + 1 = 37, suku ke-7 = 7² + 1 = 50, suku ke-8 = 8² + 1 = 65."},{"q":"Sebuah pekerjaan dapat diselesaikan oleh 15 pekerja dalam 40 hari. Setelah berjalan 10 hari, pekerjaan terhenti selama 5 hari karena hujan. Agar selesai tepat waktu, banyak pekerja tambahan yang diperlukan adalah …","a":"3 orang","d":["4 orang","5 orang","2 orang"],"e":"Sisa pekerjaan = 15 pekerja × 30 hari = 450 hari-orang. Sisa waktu = 30 - 5 = 25 hari. Pekerja dibutuhkan = 450 / 25 = 18 orang. Tambahan pekerja = 18 - 15 = 3 orang."},{"q":"Bentuk paling sederhana dari pecahan aljabar (x² - 4) / (x² + 5x + 6) adalah …","a":"(x - 2) / (x + 3)","d":["(x + 2) / (x + 3)","(x - 2) / (x - 3)","(x + 2) / (x - 3)"],"e":"Faktorkan pembilang dan penyebut: (x - 2)(x + 2) / ((x + 2)(x + 3)) = (x - 2) / (x + 3)."},{"q":"Jika x₁ dan x₂ adalah akar-akar dari persamaan kuadrat 2x² - 6x + 3 = 0, maka nilai dari 1/x₁ + 1/x₂ adalah …","a":"2","d":["3","1","1,5"],"e":"x₁ + x₂ = -b/a = -(-6)/2 = 3. x₁ × x₂ = c/a = 3/2 = 1,5. Maka 1/x₁ + 1/x₂ = (x₁ + x₂) / (x₁ × x₂) = 3 / 1,5 = 2."},{"q":"Hasil dari penjumlahan bilangan biner 1011₂ + 110₂ dalam bentuk basis 2 adalah …","a":"10001₂","d":["10010₂","1111₂","10101₂"],"e":"1011₂ = 11 desimal, 110₂ = 6 desimal. 11 + 6 = 17 desimal. Mengubah 17 ke biner: 17 = 16 + 1 = 10001₂."},{"q":"Banyaknya faktor positif (pembagi positif) dari bilangan 360 adalah …","a":"24","d":["18","20","30"],"e":"Faktorisasi prima dari 360: 360 = 2³ × 3² × 5¹. Banyak faktor = (3 + 1)(2 + 1)(1 + 1) = 4 × 3 × 2 = 24."},{"q":"Jika x + 1/x = 5, maka nilai dari x² + 1/x² adalah …","a":"23","d":["25","27","21"],"e":"Kuadratkan kedua ruas: (x + 1/x)² = x² + 2 + 1/x² = 5² = 25. Maka x² + 1/x² = 25 - 2 = 23."},{"q":"Angka satuan (digit terakhir) dari 7²⁰²⁶ adalah …","a":"9","d":["7","3","1"],"e":"Pola angka satuan 7ⁿ: 7¹=7, 7²=9, 7³=3, 7⁴=1 (berulang setiap 4 kali). 2026 dibagi 4 bersisa 2 (karena 2024 kelipatan 4). Maka angka satuannya sama dengan 7², yaitu 9."}]},{"title":"Paket 2: Matematika ACL #11 (Geometri, Data & Peluang)","sub":"Fokus Sudut, Pythagoras, Kesebangunan, Bangun Ruang, Statistika & Kombinatorika","kisi":"Garis & sudut sejajar, Teorema Pythagoras, Bangun datar & luas arsir, Kesebangunan, Transformasi geometri, Bangun ruang datar/lengkung, Mean/median/modus, Permutasi, Kombinasi & Peluang.","mapel":"mat","icon":"📐","qs":[{"q":"Dua garis sejajar dipotong oleh sebuah garis transversal sehingga membentuk sudut dalam sepihak (3x + 15)° dan (2x + 10)°. Nilai x adalah …","a":"31°","d":["35°","27°","29°"],"e":"Jumlah dua sudut dalam sepihak adalah 180°: (3x + 15) + (2x + 10) = 180 → 5x + 25 = 180 → 5x = 155 → x = 31°."},{"q":"Besar sudut terkecil yang dibentuk oleh kedua jarum jam pada pukul 03.30 adalah …","a":"75°","d":["90°","80°","70°"],"e":"Jarum menit di angka 6 (180°). Jarum jam bergerak: (3 × 30°) + (30/60 × 30°) = 90° + 15° = 105°. Sudut terkecil = 180° - 105° = 75°."},{"q":"Segitiga siku-siku sama kaki memiliki panjang sisi miring (hipotenusa) 10√2 cm. Luas segitiga tersebut adalah …","a":"50 cm²","d":["100 cm²","25 cm²","50√2 cm²"],"e":"Misalkan panjang kedua sisi siku-sikunya adalah s. Maka s² + s² = (10√2)² → 2s² = 200 → s² = 100 → s = 10 cm. Luas segitiga = 1/2 × s × s = 1/2 × 10 × 10 = 50 cm²."},{"q":"Jarak antara titik A(-2, 3) dan titik B(4, -5) pada bidang koordinat Kartesius adalah …","a":"10 satuan","d":["12 satuan","8 satuan","14 satuan"],"e":"Jarak d = √[(x₂ - x₁)² + (y₂ - y₁)²] = √[(4 - (-2))² + (-5 - 3)²] = √[6² + (-8)²] = √[36 + 64] = √100 = 10 satuan."},{"q":"Sebuah lempeng logam berbentuk persegi dengan panjang sisi 14 cm dilubangi berbentuk lingkaran penuh dengan diameter 14 cm. Luas sisa lempeng logam adalah … (π = 22/7)","a":"42 cm²","d":["56 cm²","28 cm²","48 cm²"],"e":"Luas persegi = 14 × 14 = 196 cm². Luas lingkaran = π × r² = (22/7) × 7 × 7 = 154 cm². Luas sisa = 196 - 154 = 42 cm²."},{"q":"Trapesium ABCD dengan AB sejajar CD memiliki panjang AB = 18 cm dan CD = 8 cm. Titik E dan F berturut-turut pada AD dan BC sehingga EF sejajar AB. Jika rasio perbandingan CF : FB = 2 : 3, maka panjang ruas garis EF adalah …","a":"12 cm","d":["13 cm","14 cm","11 cm"],"e":"Rumus perbandingan trapesium: EF = [(CF × AB) + (FB × CD)] / (CF + FB) = [(2 × 18) + (3 × 8)] / (2 + 3) = [36 + 24] / 5 = 60 / 5 = 12 cm."},{"q":"Perbandingan luas dua buah segitiga yang sebangun adalah 9 : 25. Jika keliling segitiga yang lebih kecil adalah 24 cm, maka keliling segitiga yang lebih besar adalah …","a":"40 cm","d":["36 cm","48 cm","50 cm"],"e":"Rasio keliling sebanding dengan akar rasio luas: k = √(9/25) = 3/5. Keliling besar = (5/3) × 24 = 40 cm."},{"q":"Bayangan titik P(3, -4) oleh pencerminan terhadap garis x = 2 yang dilanjutkan dengan translasi T(-1, 5) adalah …","a":"(0, 1)","d":["(1, 1)","(0, -1)","(1, -1)"],"e":"Pencerminan terhadap x = h (h = 2): x' = 2(2) - 3 = 1, y' = -4 → P'(1, -4). Lalu translasi T(-1, 5): x'' = 1 + (-1) = 0, y'' = -4 + 5 = 1 → P''(0, 1)."},{"q":"Bayangan titik Q(-2, 4) oleh rotasi 180° dengan pusat O(0, 0) yang dilanjutkan dengan dilatasi [O, 3] adalah …","a":"(6, -12)","d":["(-6, 12)","(12, -6)","(-12, 6)"],"e":"Rotasi 180°: (x, y) → (-x, -y). Maka Q(-2, 4) menjadi (2, -4). Dilatasi faktor skala 3: (3 × 2, 3 × (-4)) = (6, -12)."},{"q":"Sebuah prisma memiliki alas berbentuk segitiga siku-siku dengan panjang sisi siku-siku 6 cm dan 8 cm. Jika tinggi prisma 15 cm, volume prisma tersebut adalah …","a":"360 cm³","d":["720 cm³","240 cm³","480 cm³"],"e":"Luas alas segitiga = 1/2 × 6 × 8 = 24 cm². Volume prisma = Luas alas × tinggi = 24 × 15 = 360 cm³."},{"q":"Sebuah limas memiliki alas persegi bersisi 10 cm. Jika tinggi limas 12 cm, luas seluruh permukaan limas tersebut adalah …","a":"360 cm²","d":["340 cm²","260 cm²","400 cm²"],"e":"Apotema (tinggi segitiga sisi tegak) = √(12² + 5²) = √(144 + 25) = √169 = 13 cm. Luas permukaan = Luas alas + 4(Luas segitiga) = (10 × 10) + 4(1/2 × 10 × 13) = 100 + 260 = 360 cm²."},{"q":"Jari-jari sebuah tabung diperbesar menjadi 2 kali lipat, sedangkan tingginya dikurangi menjadi 1/2 kali tinggi semula. Perbandingan volume tabung baru terhadap volume tabung mula-mula adalah …","a":"2 : 1","d":["4 : 1","1 : 1","1 : 2"],"e":"V = πr²t. V_baru = π(2r)²(1/2 t) = π(4r²)(1/2 t) = 2πr²t = 2 × V_mula. Jadi rasionya 2 : 1."},{"q":"Diketahui titik O adalah pusat lingkaran. Jika besar sudut pusat ∠AOB = 70°, maka besar sudut keliling ∠ACB yang menghadap busur AB yang sama adalah …","a":"35°","d":["70°","140°","40°"],"e":"Besar sudut keliling sama dengan setengah dari besar sudut pusat yang menghadap busur yang sama: ∠ACB = 1/2 × 70° = 35°."},{"q":"Dua lingkaran masing-masing berjari-jari 12 cm dan 4 cm. Jika jarak kedua titik pusat lingkaran adalah 17 cm, maka panjang garis singgung persekutuan luar (GSPL) kedua lingkaran adalah …","a":"15 cm","d":["13 cm","16 cm","14 cm"],"e":"GSPL = √[d² - (R - r)²] = √[17² - (12 - 4)²] = √[289 - 8²] = √[289 - 64] = √225 = 15 cm."},{"q":"Dua lingkaran masing-masing berjari-jari 5 cm dan 3 cm. Jika jarak kedua titik pusat lingkaran adalah 10 cm, panjang garis singgung persekutuan dalam (GSPD) kedua lingkaran tersebut adalah …","a":"6 cm","d":["8 cm","7 cm","5 cm"],"e":"GSPD = √[d² - (R + r)²] = √[10² - (5 + 3)²] = √[100 - 8²] = √[100 - 64] = √36 = 6 cm."},{"q":"Rata-rata nilai matematika 18 siswa laki-laki adalah 74, sedangkan rata-rata nilai 12 siswa perempuan adalah 84. Rata-rata nilai seluruh siswa dalam kelas tersebut adalah …","a":"78","d":["79","77","80"],"e":"Rata-rata gabungan = [(18 × 74) + (12 × 84)] / (18 + 12) = [1.332 + 1.008] / 30 = 2.340 / 30 = 78."},{"q":"Diketahui data terurut: 4, 5, 5, 6, 7, 7, 8, 8, 9, 10, 11. Nilai jangkauan interkuartil (hamparan) data tersebut adalah …","a":"4","d":["3","5","6"],"e":"Banyak data n = 11. Kuartil kedua (median) data ke-6 = 7. Bagian bawah (5 data): 4, 5, 5, 6, 7 → Q1 = 5. Bagian atas (5 data): 8, 8, 9, 10, 11 → Q3 = 9. Jangkauan interkuartil = Q3 - Q1 = 9 - 5 = 4."},{"q":"Sebuah sekolah memiliki 120 siswa kelas 9. Pada diagram lingkaran ekstrakurikuler, juring bulu tangkis membentuk sudut 90°, renang 60°, musik 75°, dan sisanya bela diri silat. Banyak siswa yang memilih bela diri silat adalah …","a":"45 orang","d":["40 orang","50 orang","35 orang"],"e":"Sudut juring silat = 360° - (90° + 60° + 75°) = 360° - 225° = 135°. Banyak siswa = (135° / 360°) × 120 = (3/8) × 120 = 45 orang."},{"q":"Dari kota A ke kota B terdapat 4 rute jalan, dan dari kota B ke kota C terdapat 3 rute jalan. Banyak rute perjalanan yang dapat ditempuh seseorang dari kota A ke C lalu kembali ke A melalui B tanpa menggunakan rute jalan yang sama adalah …","a":"72 rute","d":["144 rute","48 rute","96 rute"],"e":"Pergi: 4 × 3 = 12 rute. Pulang (jalur berbeda): (3 - 1) × (4 - 1) = 2 × 3 = 6 rute. Total variasi rute = 12 × 6 = 72 rute."},{"q":"Dari 7 orang pengurus kelas yang berprestasi, akan dipilih 3 orang untuk menduduki jabatan sebagai ketua, sekretaris, dan bendahara. Banyak susunan kepengurusan yang mungkin terpilih adalah …","a":"210 cara","d":["35 cara","120 cara","42 cara"],"e":"Jabatan berjenjang memperhatikan urutan (permutasi): P(7, 3) = 7! / (7 - 3)! = 7 × 6 × 5 = 210 cara."},{"q":"Dari 8 siswa terbaik akan dipilih 3 orang delegasi untuk mewakili sekolah pada ajang kompetisi ACL #11. Banyak cara pemilihan delegasi tersebut adalah …","a":"56 cara","d":["336 cara","28 cara","70 cara"],"e":"Pemilihan tim tidak memperhatikan urutan (kombinasi): C(8, 3) = (8 × 7 × 6) / (3 × 2 × 1) = 56 cara."},{"q":"Dua buah dadu bermata enam dilempar bersamaan satu kali. Peluang muncul jumlah kedua mata dadu berupa bilangan prima adalah …","a":"5/12","d":["7/18","1/2","1/3"],"e":"Pasangan jumlah prima: 2 (1 pasang: (1,1)), 3 (2 pasang: (1,2),(2,1)), 5 (4 pasang), 7 (6 pasang), 11 (2 pasang). Total = 1 + 2 + 4 + 6 + 2 = 15 pasangan dari 36. Peluang = 15/36 = 5/12."},{"q":"Dalam sebuah kotak terdapat 5 bola merah, 4 bola putih, dan 3 bola hijau. Dua bola diambil satu per satu tanpa pengembalian. Peluang terambil bola pertama merah dan bola kedua putih adalah …","a":"5/33","d":["20/144","1/6","5/36"],"e":"Jumlah bola = 12. P(merah ke-1) = 5/12. Setelah diambil 1 merah, tersisa 11 bola. P(putih ke-2) = 4/11. Peluang gabungan = (5/12) × (4/11) = 20/132 = 5/33."},{"q":"Tiga keping uang logam dilempar bersamaan sebanyak 120 kali. Frekuensi harapan muncul paling sedikit dua sisi angka adalah …","a":"60 kali","d":["45 kali","75 kali","90 kali"],"e":"Ruang sampel 3 koin n(S) = 8: AAA, AAG, AGA, GAA, AGG, GAG, GGA, GGG. Kejadian minimal 2 angka: {AAA, AAG, AGA, GAA} ada 4. P = 4/8 = 1/2. Frekuensi harapan = 1/2 × 120 = 60 kali."},{"q":"Sebuah balok berukuran panjang 12 cm, lebar 4 cm, dan tinggi 3 cm. Panjang diagonal ruang balok tersebut adalah …","a":"13 cm","d":["15 cm","14 cm","12,5 cm"],"e":"Diagonal ruang = √(p² + l² + t²) = √(12² + 4² + 3²) = √(144 + 16 + 9) = √169 = 13 cm."},{"q":"Pada segitiga siku-siku ABC dengan sudut siku-siku di B, ditarik garis tinggi BD tegak lurus hipotenusa AC. Jika panjang AD = 9 cm dan CD = 16 cm, panjang ruas garis BD adalah …","a":"12 cm","d":["10 cm","14 cm","15 cm"],"e":"Teorema air mancur (kesebangunan siku-siku): BD² = AD × CD = 9 × 16 = 144 → BD = √144 = 12 cm."},{"q":"Pada sebuah lingkaran berpusat di O dengan jari-jari 10 cm, terdapat sudut pusat ∠AOB = 90°. Luas tembereng lingkaran di hadapan sudut pusat tersebut adalah … (π = 3,14)","a":"28,5 cm²","d":["50 cm²","78,5 cm²","21,5 cm²"],"e":"Luas juring = 90°/360° × πr² = 1/4 × 3,14 × 100 = 78,5 cm². Luas segitiga siku-siku AOB = 1/2 × 10 × 10 = 50 cm². Luas tembereng = 78,5 - 50 = 28,5 cm²."},{"q":"Sebuah kawat sepanjang 144 cm dipotong habis untuk membuat kerangka balok dengan perbandingan ukuran panjang : lebar : tinggi = 4 : 3 : 2. Volume balok tersebut adalah …","a":"1.536 cm³","d":["1.728 cm³","1.152 cm³","1.440 cm³"],"e":"Keliling balok = 4(p + l + t) = 144 → p + l + t = 36 cm. 4x + 3x + 2x = 9x = 36 → x = 4 cm. Ukuran: p = 16 cm, l = 12 cm, t = 8 cm. Volume = 16 × 12 × 8 = 1.536 cm³."},{"q":"Sebuah drum minyak berbentuk tabung memiliki jari-jari alas 35 cm dan tinggi 1 meter. Jika drum tersebut terisi penuh minyak, volume minyak di dalam drum adalah … (π = 22/7, 1 liter = 1.000 cm³)","a":"385 liter","d":["350 liter","770 liter","420 liter"],"e":"Tinggi = 1 m = 100 cm. V = πr²t = (22/7) × 35 × 35 × 100 = 22 × 5 × 35 × 100 = 385.000 cm³ = 385 liter."},{"q":"Diketahui trapesium sama kaki memiliki panjang sisi sejajar 10 cm dan 22 cm serta panjang sisi miring 10 cm. Luas trapesium tersebut adalah …","a":"128 cm²","d":["160 cm²","96 cm²","144 cm²"],"e":"Selisih sisi sejajar dibagi 2: (22 - 10)/2 = 6 cm. Tinggi trapesium = √(10² - 6²) = √(100 - 36) = √64 = 8 cm. Luas = 1/2 × (10 + 22) × 8 = 32 × 4 = 128 cm²."}]},{"title":"Paket 3: Matematika ACL #11 (Grand Tryout Lengkap)","sub":"Simulasi Ujian Resmi Matematika ACL #11 Mencakup Seluruh Kisi-Kisi Bab I–V","kisi":"Simulasi komprehensif 30 soal standar kompetisi nasional ACL: Bilangan, Aljabar, Geometri, Analisis Data & Peluang, serta Kapita Selekta Pemecahan Masalah.","mapel":"mat","icon":"🏆","qs":[{"q":"Hasil dari 25% + 1 1/4 × 0,8 - 3/5 dalam bentuk desimal adalah …","a":"0,65","d":["0,75","0,55","0,85"],"e":"25% = 0,25. 1 1/4 = 1,25. Perkalian: 1,25 × 0,8 = 1,0. 3/5 = 0,6. Maka 0,25 + 1,0 - 0,6 = 1,25 - 0,6 = 0,65."},{"q":"Bentuk sederhana dari 3√12 + 2√75 - √108 adalah …","a":"10√3","d":["8√3","12√3","14√3"],"e":"3√12 = 3(2√3) = 6√3. 2√75 = 2(5√3) = 10√3. √108 = 6√3. Hasil: 6√3 + 10√3 - 6√3 = 10√3."},{"q":"Sisa pembagian 2²⁰²⁴ jika dibagi oleh 7 adalah …","a":"4","d":["1","2","3"],"e":"2¹ ≡ 2, 2² ≡ 4, 2³ = 8 ≡ 1 (mod 7). Periode pengulangan adalah 3. 2024 = 3 × 674 + 2 (sisa 2). Maka 2²⁰²⁴ ≡ 2² ≡ 4 (mod 7)."},{"q":"Bilangan biner 101101₂ jika dikonversikan ke sistem bilangan desimal bernilai …","a":"45","d":["43","47","53"],"e":"101101₂ = (1 × 32) + (0 × 16) + (1 × 8) + (1 × 4) + (0 × 2) + (1 × 1) = 32 + 8 + 4 + 1 = 45."},{"q":"FPB dan KPK dari bilangan 72 dan 120 berturut-turut adalah …","a":"24 dan 360","d":["12 dan 360","24 dan 720","18 dan 360"],"e":"72 = 2³ × 3². 120 = 2³ × 3 × 5. FPB = 2³ × 3 = 24. KPK = 2³ × 3² × 5 = 8 × 9 × 5 = 360."},{"q":"Jika (2x - 1)/3 - (x + 2)/2 = 1, maka nilai dari 4x - 5 adalah …","a":"51","d":["47","55","39"],"e":"Kalikan 6 kedua ruas: 2(2x - 1) - 3(x + 2) = 6 → 4x - 2 - 3x - 6 = 6 → x - 8 = 6 → x = 14. Maka 4x - 5 = 4(14) - 5 = 56 - 5 = 51."},{"q":"Diketahui himpunan P = {x | 2 ≤ x < 15, x bilangan ganjil} dan Q = {x | 1 < x ≤ 17, x bilangan prima}. Banyak anggota dari (P ∩ Q) adalah …","a":"5","d":["4","6","7"],"e":"P = {3, 5, 7, 9, 11, 13}. Q = {2, 3, 5, 7, 11, 13, 17}. P ∩ Q = {3, 5, 7, 11, 13}. Banyak anggota n(P ∩ Q) = 5."},{"q":"Harga 3 kg mangga dan 2 kg apel adalah Rp65.000, sedangkan harga 2 kg mangga dan 2 kg apel adalah Rp50.000. Harga 1 kg mangga dan 3 kg apel adalah …","a":"Rp45.000","d":["Rp50.000","Rp40.000","Rp55.000"],"e":"Kurangkan persamaan: 1 kg mangga = Rp65.000 - Rp50.000 = Rp15.000. Maka 2(15.000) + 2(apel) = 50.000 → 2(apel) = 20.000 → 1 kg apel = Rp10.000. Harga 1 kg mangga + 3 kg apel = 15.000 + 30.000 = Rp45.000."},{"q":"Suatu barisan aritmetika memiliki suku pertama a = 8 dan suku ke-8 adalah 43. Jumlah 15 suku pertama barisan tersebut adalah …","a":"645","d":["620","660","630"],"e":"U8 = a + 7b = 8 + 7b = 43 → 7b = 35 → b = 5. S15 = 15/2 × [2(8) + 14(5)] = 15/2 × [16 + 70] = 15/2 × 86 = 15 × 43 = 645."},{"q":"Pada deret geometri dengan suku positif, diketahui U2 = 12 dan U5 = 96. Jumlah 6 suku pertama deret tersebut adalah …","a":"378","d":["384","366","192"],"e":"U5 / U2 = r³ = 96 / 12 = 8 → r = 2. U2 = ar = 2a = 12 → a = 6. S6 = a(r⁶ - 1) / (r - 1) = 6(64 - 1) / 1 = 6 × 63 = 378."},{"q":"Akar-akar persamaan kuadrat 3x² - 5x - 2 = 0 adalah x₁ dan x₂ dengan x₁ > x₂. Nilai dari 3x₁ - x₂ adalah …","a":"6 1/3","d":["5 2/3","7","6"],"e":"(3x + 1)(x - 2) = 0 → x₁ = 2 dan x₂ = -1/3. 3x₁ - x₂ = 3(2) - (-1/3) = 6 + 1/3 = 6 1/3 (atau 19/3)."},{"q":"Suatu fungsi f dirumuskan dengan f(x) = px + q. Jika f(3) = -2 dan f(-2) = 13, nilai dari f(5) adalah …","a":"-8","d":["-5","-11","7"],"e":"3p + q = -2 dan -2p + q = 13. Kurangkan: 5p = -15 → p = -3. q = -2 - 3(-3) = 7. f(x) = -3x + 7. Maka f(5) = -3(5) + 7 = -15 + 7 = -8."},{"q":"Sebuah kapal berlayar ke arah timur sejauh 120 km, kemudian berbelok ke arah utara sejauh 90 km. Jarak terpendek kapal dari tempat pemberangkatan semula adalah …","a":"150 km","d":["160 km","140 km","210 km"],"e":"Berdasarkan teorema Pythagoras: d = √(120² + 90²) = √(14.400 + 8.100) = √22.500 = 150 km."},{"q":"Sebuah tiang bendera setinggi 6 meter memiliki bayangan sepanjang 8 meter di tanah. Pada saat yang sama, panjang bayangan sebuah gedung bertingkat adalah 28 meter. Tinggi gedung tersebut adalah …","a":"21 meter","d":["24 meter","18 meter","22,5 meter"],"e":"Kesebangunan: t_gedung / 28 = 6 / 8 → t_gedung = (6 × 28) / 8 = 168 / 8 = 21 meter."},{"q":"Besar sudut penyiku dari sebuah sudut adalah 25°. Besar sudut pelurus dari sudut tersebut adalah …","a":"115°","d":["125°","105°","155°"],"e":"Sudut + penyiku = 90° → sudut = 90° - 25° = 65°. Pelurus = 180° - 65° = 115°."},{"q":"Keliling belah ketupat adalah 52 cm. Jika panjang salah satu diagonalnya adalah 10 cm, maka luas belah ketupat tersebut adalah …","a":"120 cm²","d":["240 cm²","130 cm²","100 cm²"],"e":"Sisi s = 52 / 4 = 13 cm. Setengah d1 = 5 cm. Setengah d2 = √(13² - 5²) = √(169 - 25) = √144 = 12 cm → d2 = 24 cm. Luas = 1/2 × 10 × 24 = 120 cm²."},{"q":"Luas juring lingkaran dengan sudut pusat 45° adalah 77 cm². Panjang jari-jari lingkaran tersebut adalah … (π = 22/7)","a":"14 cm","d":["21 cm","7 cm","28 cm"],"e":"Luas juring = (45°/360°) × πr² = (1/8) × (22/7) × r² = 77 → (11/28) × r² = 77 → r² = (77 × 28) / 11 = 7 × 28 = 196 → r = √196 = 14 cm."},{"q":"Sebuah kubus memiliki panjang diagonal sisi 8√2 cm. Luas permukaan seluruh kubus tersebut adalah …","a":"384 cm²","d":["512 cm²","256 cm²","576 cm²"],"e":"Diagonal sisi = s√2 = 8√2 cm → rusuk s = 8 cm. Luas permukaan = 6 × s² = 6 × 8² = 6 × 64 = 384 cm²."},{"q":"Sebuah kerucut memiliki jari-jari alas 7 cm dan panjang garis pelukis 25 cm. Volume kerucut tersebut adalah … (π = 22/7)","a":"1.232 cm³","d":["1.156 cm³","1.344 cm³","3.696 cm³"],"e":"Tinggi t = √(25² - 7²) = √(625 - 49) = √576 = 24 cm. Volume = 1/3 × πr²t = 1/3 × (22/7) × 49 × 24 = 22 × 7 × 8 = 1.232 cm³."},{"q":"Sebuah bola dimasukkan tepat ke dalam tabung tertutup sehingga dinding bola menyinggung sisi alas, tutup, dan selimut tabung. Jika luas permukaan bola 144 cm², maka luas seluruh permukaan tabung adalah …","a":"216 cm²","d":["288 cm²","180 cm²","144 cm²"],"e":"Tinggi tabung t = 2r. Luas permukaan bola = 4πr² = 144 cm² → πr² = 36 cm². Luas tabung = 2πr² + 2πrt = 2πr² + 2πr(2r) = 6πr² = 6 × 36 = 216 cm²."},{"q":"Titik K(5, -2) ditranslasikan oleh T(-3, 6) kemudian dicerminkan terhadap garis y = -x. Koordinat bayangan akhir titik K adalah …","a":"(-4, -2)","d":["(-2, -4)","(4, 2)","(-4, 2)"],"e":"Translasi: K'(5 - 3, -2 + 6) = K'(2, 4). Refleksi terhadap y = -x: (x, y) → (-y, -x). Maka (2, 4) menjadi (-4, -2)."},{"q":"Data ulangan IPA sekelompok siswa: 7, 8, 6, 9, 8, 7, 7, 10, 8, 9. Nilai rata-rata dan modusnya berturut-turut adalah …","a":"7,9 dan 7 serta 8 (bimodal)","d":["7,8 dan 8","8,0 dan 7","7,9 dan 8 saja"],"e":"Jumlah data = 79, banyak data = 10. Rata-rata = 79 / 10 = 7,9. Frekuensi: 6 (1), 7 (3), 8 (3), 9 (2), 10 (1). Modus ada dua, yaitu 7 dan 8 (muncul 3 kali)."},{"q":"Rata-rata berat badan 15 siswa adalah 48 kg. Jika 5 siswa baru dengan rata-rata berat badan 52 kg digabungkan, rata-rata berat badan seluruh siswa menjadi …","a":"49 kg","d":["49,5 kg","50 kg","48,8 kg"],"e":"Rata-rata gabungan = [(15 × 48) + (5 × 52)] / (15 + 5) = [720 + 260] / 20 = 980 / 20 = 49 kg."},{"q":"Banyaknya bilangan ratusan bernilai genap yang dapat disusun dari angka-angka 1, 2, 3, 4, 5, 6 tanpa pengulangan angka adalah …","a":"60 bilangan","d":["48 bilangan","72 bilangan","120 bilangan"],"e":"Angka satuan harus genap {2, 4, 6} (3 pilihan). Angka ratusan: tersisa 5 angka. Angka puluhan: tersisa 4 angka. Total = 5 × 4 × 3 = 60 bilangan."},{"q":"Dalam sebuah kelompok belajar terdiri dari 5 siswa laki-laki dan 4 siswa perempuan. Akan dibentuk tim cerdas cermat yang beranggotakan 2 laki-laki dan 1 perempuan. Banyak cara pembentukan tim tersebut adalah …","a":"40 cara","d":["30 cara","20 cara","60 cara"],"e":"C(5, 2) × C(4, 1) = [(5 × 4) / 2] × 4 = 10 × 4 = 40 cara."},{"q":"Dua buah dadu dilempar bersamaan. Peluang muncul jumlah kedua mata dadu kurang dari 5 adalah …","a":"1/6","d":["5/36","1/4","7/36"],"e":"Jumlah < 5 adalah 2 (1 pasang: (1,1)), 3 (2 pasang: (1,2),(2,1)), 4 (3 pasang: (1,3),(2,2),(3,1)). Total = 1 + 2 + 3 = 6 pasang dari 36. Peluang = 6/36 = 1/6."},{"q":"Peluang seorang siswa lulus seleksi babak penyisihan ACL adalah 0,75. Jika terdapat 400 siswa dari suatu daerah yang mengikuti seleksi, banyak siswa yang diperkirakan TIDAK lulus adalah …","a":"100 orang","d":["75 orang","120 orang","300 orang"],"e":"Peluang tidak lulus = 1 - 0,75 = 0,25. Frekuensi harapan tidak lulus = 0,25 × 400 = 100 orang."},{"q":"Persamaan garis lurus yang tegak lurus dengan garis 2x - 3y + 6 = 0 dan melalui titik (4, -1) adalah …","a":"3x + 2y - 10 = 0","d":["3x - 2y - 14 = 0","2x + 3y - 5 = 0","3x + 2y + 10 = 0"],"e":"Gradien m1 = 2/3. Tegak lurus: m2 = -3/2. Persamaan: y - (-1) = -3/2 (x - 4) → 2(y + 1) = -3(x - 4) → 2y + 2 = -3x + 12 → 3x + 2y - 10 = 0."},{"q":"Perhatikan barisan bilangan: 3, 6, 11, 18, 27, … Suku ke-10 dari barisan tersebut adalah …","a":"102","d":["100","98","104"],"e":"Pola suku ke-n adalah Un = n² + 2. Suku ke-10: U10 = 10² + 2 = 100 + 2 = 102."},{"q":"Jika operasi matematika a ¤ b didefinisikan sebagai (a × b) + (a - b), maka nilai dari 5 ¤ (3 ¤ 2) adalah …","a":"33","d":["35","37","41"],"e":"Hitung terlebih dahulu 3 ¤ 2 = (3 × 2) + (3 - 2) = 6 + 1 = 7. Kemudian hitung 5 ¤ 7 = (5 × 7) + (5 - 7) = 35 + (-2) = 33."}]},{"title":"Paket 4: IPA ACL #11 (Fisika, Zat, Fluida & Kelistrikan)","sub":"Fokus Pengukuran, Termal, Kinematika, Dinamika, Tekanan, Optik, Listrik & IPBA","kisi":"Jangka sorong & mikrometer sekrup, Zat & pemuaian kalor, Azas Black, GLBB & Hukum Newton, Pesawat sederhana, Fluida hidrostatis & Archimedes, Bunyi, Optika cermin/lensa, Listrik dinamis & Magnet.","mapel":"ipa","icon":"🧪","qs":[{"q":"Pengukuran diameter sebuah bola logam kecil menggunakan jangka sorong menunjukkan skala utama 3,1 cm dan garis nonius ke-6 berhimpit tepat dengan garis skala utama. Jika ketelitian jangka sorong 0,01 cm (0,1 mm), maka diameter bola tersebut adalah …","a":"3,16 cm","d":["3,10 cm","3,26 cm","3,70 cm"],"e":"Hasil = Skala Utama + (Nonius × Ketelitian) = 3,1 cm + (6 × 0,01 cm) = 3,1 cm + 0,06 cm = 3,16 cm."},{"q":"Hasil pembacaan mikrometer sekrup menunjukkan skala utama pada angka 5,5 mm dan skala putar (nonius) menunjukkan angka 28. Tebal benda yang diukur adalah …","a":"5,78 mm","d":["5,28 mm","5,58 mm","5,88 mm"],"e":"Hasil = Skala Utama + (Skala Putar × 0,01 mm) = 5,5 mm + (28 × 0,01 mm) = 5,5 mm + 0,28 mm = 5,78 mm."},{"q":"Kelompok besaran di bawah ini yang seluruhnya termasuk besaran turunan beserta satuan SI-nya yang benar adalah …","a":"Gaya (newton), Usaha (joule), Tekanan (pascal)","d":["Kecepatan (m/s), Massa (kg), Waktu (sekon)","Kuat arus (ampere), Tegangan (volt), Daya (watt)","Suhu (kelvin), Energi (joule), Luas (m²)"],"e":"Gaya, usaha, dan tekanan semuanya adalah besaran turunan. Massa, waktu, kuat arus, dan suhu adalah besaran pokok."},{"q":"Sebuah batu bermassa 180 gram dimasukkan ke dalam gelas ukur yang berisi air 50 mL. Permukaan air naik hingga menunjukkan angka 110 mL. Massa jenis batu tersebut adalah …","a":"3,0 g/cm³","d":["2,5 g/cm³","1,8 g/cm³","3,6 g/cm³"],"e":"Volume batu = 110 mL - 50 mL = 60 mL = 60 cm³. Massa jenis ρ = m / V = 180 g / 60 cm³ = 3,0 g/cm³."},{"q":"Termometer X memiliki titik beku air 20°X dan titik didih air 140°X pada tekanan 1 atm. Jika suatu benda diukur dengan termometer Celsius bersuhu 50°C, maka suhu benda tersebut pada termometer X adalah …","a":"80°X","d":["70°X","90°X","60°X"],"e":"Rentang skala X = 140 - 20 = 120°X. Rentang Celsius = 100°C. Perbandingan = 120/100 = 6/5. Suhu X = 20 + (6/5 × 50) = 20 + 60 = 80°X."},{"q":"Air bermassa 200 gram pada suhu 80°C dicampur dengan 300 gram air pada suhu 20°C dalam bejana terisolasi. Jika kalor jenis air 1 kal/g°C dan bejana tidak menyerap kalor, suhu akhir campuran adalah …","a":"44°C","d":["50°C","40°C","48°C"],"e":"Azas Black: Q_lepas = Q_terima → 200 × 1 × (80 - T) = 300 × 1 × (T - 20) → 2(80 - T) = 3(T - 20) → 160 - 2T = 3T - 60 → 5T = 220 → T = 44°C."},{"q":"Keping bimetal yang terdiri dari tembaga (koefisien muai panjang lebih besar) dan besi (koefisien muai panjang lebih kecil) direkatkan menjadi satu. Jika keping bimetal tersebut dipanaskan, keping akan melengkung ke arah …","a":"Besi (logam yang koefisien muainya lebih kecil)","d":["Tembaga (logam yang koefisien muainya lebih besar)","Tetap lurus karena saling menahan","Sembarang arah"],"e":"Saat dipanaskan, logam dengan pemuaian lebih besar (tembaga) bertambah panjang lebih cepat sehingga mendorong keping melengkung ke arah logam yang pemuaiannya lebih kecil (besi)."},{"q":"Perpindahan kalor yang terjadi tanpa memerlukan zat perantara (medium) sama sekali adalah …","a":"Radiasi","d":["Konduksi","Konveksi","Evaporasi"],"e":"Radiasi adalah perpindahan panas melalui pancaran gelombang elektromagnetik tanpa memerlukan zat perantara, contohnya panas matahari sampai ke bumi melewati ruang hampa udara."},{"q":"Sebuah mobil bergerak lurus dengan kecepatan awal 10 m/s dan mengalami percepatan konstan 2 m/s² selama 5 sekon. Jarak yang ditempuh mobil selama selang waktu tersebut adalah …","a":"75 meter","d":["50 meter","60 meter","85 meter"],"e":"s = v₀t + 1/2 at² = (10 × 5) + (1/2 × 2 × 5²) = 50 + 25 = 75 meter."},{"q":"Sebuah balok bermassa 4 kg ditarik ke kanan dengan gaya F1 = 25 N dan ke kiri dengan gaya F2 = 5 N di atas lantai kasar dengan gaya gesek f = 4 N. Percepatan yang dialami balok adalah …","a":"4 m/s²","d":["5 m/s²","3 m/s²","6 m/s²"],"e":"Resultan gaya ΣF = F1 - F2 - f = 25 - 5 - 4 = 16 N ke kanan. Berdasarkan Hukum II Newton: a = ΣF / m = 16 N / 4 kg = 4 m/s²."},{"q":"Pernyataan di bawah ini yang merupakan pasangan gaya aksi-reaksi menurut Hukum III Newton adalah …","a":"Gaya dorong kaki perenang ke dinding kolam dan gaya dorong dinding kolam ke kaki perenang","d":["Gaya berat benda dan gaya normal meja pada benda yang diam","Gaya gesek lantai dan gaya tarik tali pada benda yang sama","Gaya gravitasi bumi pada buku dan gaya angkat tangan pada buku"],"e":"Gaya aksi dan reaksi besarnya sama, arahnya berlawanan, dan bekerja pada DUA BENDA YANG BERBEDA. Gaya berat dan gaya normal bekerja pada satu benda yang sama sehingga bukan pasangan aksi-reaksi."},{"q":"Sebuah benda bermassa 2 kg jatuh bebas dari ketinggian 20 meter di atas tanah (g = 10 m/s²). Energi kinetik benda saat berada pada ketinggian 5 meter di atas tanah adalah …","a":"300 joule","d":["100 joule","200 joule","400 joule"],"e":"Energi mekanik kekal: Em = Ep_awal = m × g × h_awal = 2 × 10 × 20 = 400 J. Pada h = 5 m: Ep = 2 × 10 × 5 = 100 J. Maka Ek = Em - Ep = 400 - 100 = 300 J."},{"q":"Sebuah katrol bergerak digunakan untuk mengangkat beban seberat 600 N. Besar gaya kuasa minimum yang diperlukan untuk mengangkat beban tersebut adalah …","a":"300 N","d":["600 N","150 N","1.200 N"],"e":"Katrol bergerak memiliki keuntungan mekanis (KM) = 2. F = W / KM = 600 N / 2 = 300 N."},{"q":"Sebuah papan sepanjang 5 meter digunakan sebagai bidang miring untuk menaikkan drum bermassa 100 kg ke atas bak truk setinggi 1,5 meter (g = 10 m/s²). Keuntungan mekanis bidang miring tersebut adalah …","a":"3,33","d":["2,5","4,0","1,5"],"e":"Keuntungan mekanis bidang miring KM = s / h = 5 meter / 1,5 meter = 10/3 ≈ 3,33."},{"q":"Seorang penyelam berada pada kedalaman 8 meter di bawah permukaan danau air tawar (massa jenis air = 1.000 kg/m³, g = 10 m/s²). Tekanan hidrostatis yang dialami penyelam adalah …","a":"80.000 Pa","d":["8.000 Pa","800 Pa","800.000 Pa"],"e":"P_h = ρ × g × h = 1.000 kg/m³ × 10 m/s² × 8 m = 80.000 Pa."},{"q":"Dongkrak hidrolik memiliki penampang kecil dengan luas 10 cm² dan penampang besar 200 cm². Jika penampang kecil ditekan dengan gaya 50 N, gaya angkat yang dihasilkan pada penampang besar adalah …","a":"1.000 N","d":["500 N","2.000 N","100 N"],"e":"Hukum Pascal: F1 / A1 = F2 / A2 → 50 / 10 = F2 / 200 → 5 = F2 / 200 → F2 = 1.000 N."},{"q":"Sebuah balok kayu terapung di permukaan air dengan 2/5 bagian volumenya muncul di atas permukaan air. Jika massa jenis air 1.000 kg/m³, maka massa jenis balok kayu tersebut adalah …","a":"600 kg/m³","d":["400 kg/m³","800 kg/m³","750 kg/m³"],"e":"Bagian yang tercelup = 1 - 2/5 = 3/5 bagian. Syarat terapung: ρ_benda = (V_celup / V_total) × ρ_zat cair = 3/5 × 1.000 kg/m³ = 600 kg/m³."},{"q":"Naiknya air dan mineral dari akar menuju daun pada tumbuhan melalui pembuluh xilem terutama didorong oleh peristiwa …","a":"Kapilaritas batang dan daya isap daun","d":["Tekanan hidrostatis tanah","Gravitasi dan osmosis balik","Hukum Pascal pada jaringan floem"],"e":"Pembuluh xilem yang sempit bertindak sebagai pipa kapiler sehingga air naik karena gaya adhesi dan kohesi (kapilaritas), diperkuat oleh transpirasi (daya isap daun)."},{"q":"Sebuah pegas melakukan 60 kali getaran dalam waktu 15 sekon. Frekuensi dan periode getaran pegas berturut-turut adalah …","a":"4 Hz dan 0,25 sekon","d":["0,25 Hz dan 4 sekon","4 Hz dan 0,5 sekon","2 Hz dan 0,5 sekon"],"e":"Frekuensi f = n / t = 60 / 15 = 4 Hz. Periode T = 1 / f = 1 / 4 = 0,25 sekon."},{"q":"Gelombang transversal merambat dengan panjang gelombang 0,5 meter. Jika cepat rambat gelombang tersebut 20 m/s, frekuensi gelombang adalah …","a":"40 Hz","d":["10 Hz","20 Hz","50 Hz"],"e":"v = λ × f → f = v / λ = 20 m/s / 0,5 m = 40 Hz."},{"q":"Sebuah kapal peneliti memancarkan pulsa gelombang ultrasonik ke dasar laut. Pantulan gelombang diterima kembali oleh detektor kapal setelah 2,4 sekon. Jika cepat rambat bunyi dalam air laut 1.500 m/s, kedalaman laut di tempat tersebut adalah …","a":"1.800 meter","d":["3.600 meter","900 meter","1.200 meter"],"e":"Kedalaman s = (v × t) / 2 = (1.500 × 2,4) / 2 = 3.600 / 2 = 1.800 meter."},{"q":"Sebuah benda diletakkan 15 cm di depan cermin cekung yang memiliki jarak fokus 10 cm. Sifat bayangan yang terbentuk pada cermin tersebut adalah …","a":"Nyata, terbalik, diperbesar","d":["Maya, tegak, diperbesar","Nyata, terbalik, diperkecil","Maya, tegak, sama besar"],"e":"Benda berada di antara fokus (f = 10) dan titik pusat kelengkungan (R = 20), yaitu di Ruang II. Bayangan terbentuk di Ruang III (di depan cermin), sehingga sifatnya nyata, terbalik, dan diperbesar."},{"q":"Sebuah benda berada 30 cm di depan lensa cembung yang memiliki jarak titik api (fokus) 20 cm. Jarak bayangan benda yang terbentuk adalah …","a":"60 cm di belakang lensa","d":["50 cm di belakang lensa","40 cm di belakang lensa","12 cm di depan lensa"],"e":"1/s' = 1/f - 1/s = 1/20 - 1/30 = (3 - 2)/60 = 1/60 → s' = +60 cm (di belakang lensa)."},{"q":"Seseorang hanya dapat melihat benda dengan jelas paling jauh pada jarak 2 meter (titik jauh PR = 2 m). Agar dapat melihat benda jauh secara normal, orang tersebut harus memakai kacamata berlensa …","a":"Cekung dengan kekuatan -0,5 dioptri","d":["Cembung dengan kekuatan +0,5 dioptri","Cekung dengan kekuatan -2 dioptri","Cembung dengan kekuatan +2 dioptri"],"e":"Penderita miopi memerlukan kacamata lensa cekung (negatif): P = -100 / PR(cm) = -100 / 200 = -0,5 dioptri."},{"q":"Kekuatan lensa kacamata yang dibutuhkan oleh penderita rabun dekat (hipermetropi) yang memiliki titik dekat (punctum proximum) 50 cm agar dapat membaca pada jarak normal 25 cm adalah …","a":"+2 dioptri","d":["+1 dioptri","-2 dioptri","+4 dioptri"],"e":"P = (100 / Sn) - (100 / PP) = (100 / 25) - (100 / 50) = 4 - 2 = +2 dioptri."},{"q":"Dua muatan listrik sejenis q1 dan q2 berjarak r satu sama lain dan mengalami gaya tolak sebesar F. Jika jarak antara kedua muatan diperkecil menjadi 1/2 r, maka gaya tolak antara kedua muatan menjadi …","a":"4F","d":["2F","1/4 F","1/2 F"],"e":"Hukum Coulomb: F berbanding terbalik dengan r². F' = F / (1/2)² = F / (1/4) = 4F."},{"q":"Ketika penggaris plastik digosokkan dengan kain wol, penggaris menjadi bermuatan negatif karena …","a":"Elektron berpindah dari kain wol ke penggaris plastik","d":["Elektron berpindah dari penggaris ke kain wol","Proton berpindah dari kain wol ke penggaris","Penggaris melepaskan muatan netral"],"e":"Penggaris plastik memiliki afinitas elektron lebih kuat daripada wol, sehingga elektron dari kain wol berpindah ke penggaris plastik, menjadikannya kelebihan elektron (bermuatan negatif)."},{"q":"Kawat penghantar dengan hambatan R memiliki panjang L dan luas penampang A. Kawat lain dari bahan sejenis memiliki panjang 2L dan luas penampang 1/2 A. Hambatan kawat kedua adalah …","a":"4R","d":["2R","R","8R"],"e":"R = ρ × (L / A). R' = ρ × (2L / (1/2 A)) = ρ × (4L / A) = 4R."},{"q":"Tiga buah resistor masing-masing bernilai R1 = 6 Ω, R2 = 3 Ω, dan R3 = 2 Ω dirangkai secara paralel, lalu dihubungkan ke sumber tegangan 6 V. Kuat arus total yang mengalir pada rangkaian adalah …","a":"6 ampere","d":["3 ampere","2 ampere","12 ampere"],"e":"1/Rp = 1/6 + 1/3 + 1/2 = (1 + 2 + 3)/6 = 6/6 = 1 → Rp = 1 Ω. Arus I = V / Rp = 6 V / 1 Ω = 6 A."},{"q":"Sebuah rumah menggunakan 4 lampu masing-masing 25 W menyala 10 jam per hari, dan sebuah setrika listrik 300 W menyala 2 jam per hari. Energi listrik total yang dikonsumsi selama 30 hari adalah …","a":"48 kWh","d":["36 kWh","60 kWh","54 kWh"],"e":"Energi per hari: (4 × 25 W × 10 jam) + (300 W × 2 jam) = 1.000 Wh + 600 Wh = 1.600 Wh = 1,6 kWh/hari. Dalam 30 hari: 1,6 × 30 = 48 kWh."},{"q":"Sebuah batang besi dibuat menjadi magnet dengan cara digosok menggunakan kutub utara magnet secara searah dari ujung P ke ujung Q. Kutub magnet yang terbentuk pada ujung P dan Q adalah …","a":"P kutub utara, Q kutub selatan","d":["P kutub selatan, Q kutub utara","P dan Q keduanya kutub utara","P dan Q keduanya kutub selatan"],"e":"Pada pembuatan magnet dengan menggosok searah, ujung terakhir yang digosok (Q) akan berlawanan jenis dengan kutub penggosok (menjadi kutub selatan). Maka ujung awal (P) menjadi kutub utara."},{"q":"Kawat lurus sepanjang 20 cm dialiri arus listrik 5 A dan berada tegak lurus di dalam medan magnet homogen 0,4 tesla. Besar gaya Lorentz yang dialami kawat tersebut adalah …","a":"0,4 newton","d":["4,0 newton","0,2 newton","0,8 newton"],"e":"L = 20 cm = 0,2 m. F = B × I × L × sin 90° = 0,4 T × 5 A × 0,2 m × 1 = 0,4 N."},{"q":"Sebuah transformator step-down memiliki 1.000 lilitan primer dan 200 lilitan sekunder. Jika tegangan pada kumparan primer 220 V, maka tegangan yang dihasilkan pada kumparan sekunder adalah …","a":"44 V","d":["1.100 V","22 V","88 V"],"e":"Vs / Vp = Ns / Np → Vs / 220 = 200 / 1.000 → Vs = 220 × (1/5) = 44 V."},{"q":"Berikut ini yang merupakan contoh larutan yang bersifat asam kuat dan memerahkan kertas lakmus biru adalah …","a":"Asam klorida (HCl)","d":["Natrium hidroksida (NaOH)","Amonia (NH3)","Garam dapur (NaCl)"],"e":"HCl adalah asam kuat yang melepaskan ion H+ dalam air dan mengubah warna lakmus biru menjadi merah. NaOH dan NH3 bersifat basa, sedangkan NaCl bersifat netral."},{"q":"Pemanis buatan yang memiliki tingkat kemanisan hingga ratusan kali gula tebu tetapi tidak menghasilkan kalori, sering digunakan pada makanan diet, adalah …","a":"Aspartam dan sakarin","d":["Glukosa dan sukrosa","Madu dan gula aren","Monosodium glutamat dan karamel"],"e":"Aspartam, sakarin, dan siklamat adalah pemanis sintetis berkalori sangat rendah atau nol. Glukosa dan sukrosa adalah pemanis alami berkalori tinggi."},{"q":"Zat adiktif yang terkandung di dalam daun tembakau dan dapat memicu peningkatan tekanan darah serta kecanduan adalah …","a":"Nikotin","d":["Kafein","Tar","Karbon monoksida"],"e":"Nikotin adalah senyawa alkaloid stimulan yang menyebabkan kecanduan pada tembakau/rokok. Tar adalah zat karsinogenik penyebab kanker paru-paru."},{"q":"Lapisan atmosfer bumi tempat terjadinya fenomena cuaca seperti awan, hujan, angin, dan petir adalah …","a":"Troposfer","d":["Stratosfer","Mesosfer","Termosfer"],"e":"Troposfer adalah lapisan paling bawah (0-12 km) yang mengandung 80% massa udara dan tempat berlangsungnya seluruh gejala cuaca."},{"q":"Daerah bayangan inti Bulan yang sangat gelap dan jatuh ke permukaan bumi saat gerhana matahari total disebut …","a":"Umbra","d":["Penumbra","Antumbra","Korona"],"e":"Umbra adalah bayangan inti yang sangat gelap. Wilayah bumi yang dilalui umbra akan mengalami gerhana matahari total. Penumbra menghasilkan gerhana sebagian."},{"q":"Patahan lempeng bumi di dasar laut yang bergerak naik-turun secara vertikal akibat gempa bumi berpotensi memicu gelombang dahsyat yang disebut …","a":"Tsunami","d":["El Nino","Tornado","Pasang purnama"],"e":"Dislokasi dasar laut secara vertikal memindahkan volume air laut dalam jumlah masif secara tiba-tiba, memicu gelombang tsunami ke arah pantai."},{"q":"Peristiwa alam di bawah ini yang merupakan AKIBAT dari REVOLUSI Bumi mengelilingi Matahari adalah …","a":"Pergantian musim dan gerak semu tahunan Matahari","d":["Pergantian siang dan malam","Perbedaan waktu antarwilayah bujur","Pembelokan arah angin siklon"],"e":"Revolusi bumi bersama kemiringan sumbu bumi menyebabkan pergantian musim dan gerak semu tahunan matahari. Pergantian siang-malam dan perbedaan waktu disebabkan oleh rotasi bumi."}]},{"title":"Paket 5: IPA ACL #11 (Biologi, Sel, Genetika & Ekologi)","sub":"Fokus Organel Sel, Transpor Membran, Organ Manusia, Hukum Mendel & Bioteknologi","kisi":"Organel sel, Difusi & osmosis, Jaringan & sistem organ (jantung, pernapasan, ekskresi, saraf, hormon), Ekologi & profil tanah, Hukum Mendel & pewarisan sifat, Bioteknologi konvensional & modern.","mapel":"ipa","icon":"🧬","qs":[{"q":"Organel sel yang sering dijuluki sebagai 'the powerhouse of cell' karena berfungsi sebagai tempat respirasi seluler untuk menghasilkan energi dalam bentuk ATP adalah …","a":"Mitokondria","d":["Ribosom","Lisosom","Badan Golgi"],"e":"Mitokondria adalah organel bermembran ganda tempat respirasi aerob berlangsung untuk menghasilkan molekul ATP berenergi tinggi."},{"q":"Organel sel yang hanya dijumpai pada sel tumbuhan dan TIDAK dijumpai pada sel hewan adalah …","a":"Dinding sel, kloroplas, dan vakuola berukuran besar","d":["Sentriol, lisosom, dan membran sel","Mitokondria, ribosom, dan nukleus","Badan Golgi, retikulum endoplasma, dan peroksisom"],"e":"Dinding sel (dari selulosa), plastida/kloroplas (untuk fotosintesis), dan vakuola sentral besar hanya dimiliki sel tumbuhan. Sel hewan memiliki sentriol yang tidak ada pada tumbuhan tingkat tinggi."},{"q":"Sel darah merah manusia (eritrosit) jika dimasukkan ke dalam larutan garam pekat (larutan hipertonik) akan mengalami pengerutan yang disebut peristiwa …","a":"Krenasi","d":["Hemolisis","Plasmolisis","Turgid"],"e":"Air dalam sel darah merah akan keluar secara osmosis ke larutan hipertonik sehingga eritrosit mengerut (krenasi). Jika pada sel tumbuhan disebut plasmolisis. Jika dimasukkan ke larutan hipotonik, eritrosit akan menggembung dan pecah (hemolisis)."},{"q":"Jaringan pada tumbuhan yang aktif membelah secara mitosis dan bertanggung jawab atas pertumbuhan memanjang ujung akar dan tunas adalah jaringan …","a":"Meristem apikal","d":["Parenkim","Kolenkim","Epidermis"],"e":"Meristem apikal (ujung) berada di ujung pucuk dan akar, sel-selnya embrionik dan aktif membelah menyebabkan pertumbuhan primer."},{"q":"Jaringan pembuluh angkut pada tumbuhan yang bertugas mengedarkan hasil fotosintesis (glukosa) dari daun ke seluruh bagian tubuh tumbuhan adalah …","a":"Floem (pembuluh tapis)","d":["Xilem (pembuluh kayu)","Kambium","Korteks"],"e":"Floem mengangkut zat makanan hasil fotosintesis dari daun ke seluruh tubuh. Xilem mengangkut air dan unsur hara tanah dari akar ke daun."},{"q":"Jaringan otot yang memiliki ciri berbentuk silindris bercabang, memiliki satu atau dua inti di tengah sel, bekerja secara tidak sadar (involunter), dan memiliki diskus interkalaris adalah …","a":"Otot jantung","d":["Otot lurik (otot rangka)","Otot polos","Otot lurik polos"],"e":"Otot jantung memiliki sifat gabungan: strukturnya berlurik dan bercabang dengan diskus interkalaris, tetapi kerjanya otonom/involunter di bawah kendali saraf simpatik dan parasimpatik."},{"q":"Pada percobaan fotosintesis Sachs, daun yang ditutupi kertas timah/aluminium foil saat ditetesi larutan lugol tidak berubah menjadi biru kehitaman melainkan berwarna pucat. Hal ini membuktikan bahwa …","a":"Fotosintesis menghasilkan amilum dan memerlukan cahaya matahari","d":["Fotosintesis menghasilkan gas oksigen","Klorofil tidak diperlukan dalam fotosintesis","Air adalah bahan baku utama fotosintesis"],"e":"Bagian daun yang tidak tertutup cahaya matahari mampu berfotosintesis menghasilkan amilum (bereaksi positif dengan lugol menjadi biru-hitam), sedangkan bagian tertutup tidak menghasilkan amilum."},{"q":"Enzim pencernaan yang dihasilkan oleh kelenjar lambung dan berfungsi memecah protein menjadi molekul pepton adalah enzim …","a":"Pepsin","d":["Tripsin","Ptialin","Lipase"],"e":"Pepsin dihasilkan oleh lambung dan bekerja aktif dalam suasana asam (pH 1,5 - 2) yang dibantu oleh asam klorida (HCl)."},{"q":"Fungsi cairan empedu yang diproduksi oleh organ hati dan disimpan di kantong empedu dalam proses pencernaan makanan adalah …","a":"Mengemulsikan lemak agar mudah dicerna oleh enzim lipase","d":["Mencerna protein menjadi asam amino","Mengubah zat tepung menjadi glukosa","Membunuh bakteri patogen di usus besar"],"e":"Garam empedu menurunkan tegangan permukaan butiran lemak sehingga pecah menjadi emulsi tetesan kecil, mempermudah kerja enzim lipase."},{"q":"Permukaan dinding dalam usus halus (terutama ileum) memiliki banyak lipatan dan jonjot-jonjot halus (vili). Struktur vili tersebut berfungsi untuk …","a":"Memperluas bidang penyerapan sari-sari makanan","d":["Mencegah makanan kembali ke lambung","Menghasilkan asam lambung","Membusukkan sisa makanan menjadi feses"],"e":"Lipatan vili dan mikrovili memperluas area permukaan penyerapan nutrisi hingga mencapai 250-300 m² (setara lapangan tenis)."},{"q":"Pembuluh darah yang memiliki dinding tebal, kuat, elastis, dan membawa darah kaya oksigen keluar dari bilik kiri jantung menuju ke seluruh tubuh adalah …","a":"Aorta (arteri utama)","d":["Vena cava superior","Vena pulmonalis","Arteri pulmonalis"],"e":"Aorta adalah arteri terbesar yang menerima darah bertekanan tinggi dari bilik kiri untuk didistribusikan ke seluruh tubuh."},{"q":"Seseorang yang mengalami kecelakaan kehilangan banyak darah dan diketahui memiliki golongan darah B. Orang tersebut dapat menerima transfusi darah secara aman dari donor bergolongan darah …","a":"B dan O","d":["Hanya B","B dan AB","A, B, dan O"],"e":"Penerima golongan darah B memiliki antibodi anti-A dalam plasmanya, sehingga hanya dapat menerima sel darah tanpa antigen A, yaitu donor B dan O."},{"q":"Pada sistem pernapasan manusia, pertukaran gas oksigen (O₂) dan karbon dioksida (CO₂) antara udara pernapasan dan pembuluh kapiler darah berlangsung di dalam …","a":"Alveolus","d":["Bronkiolus","Trakea","Laring"],"e":"Alveolus adalah kantung udara berdinding selapis epitel sangat tipis yang dikelilingi anyaman kapiler, tempat difusi gas O₂ dan CO₂."},{"q":"Ketika seseorang menarik napas dalam-dalam (inspirasi maksimal), udara yang masuk setelah inspirasi biasa disebut …","a":"Udara komplementer (cadangan inspirasi)","d":["Udara tidal","Udara suplementer","Udara residu"],"e":"Udara tidal = napas biasa (~500 mL). Udara komplementer = udara cadangan inspirasi (~1.500 mL). Udara residu = udara sisa yang tidak dapat dihembuskan (~1.000 mL)."},{"q":"Proses pembentukan urine pada ginjal manusia melalui tiga tahapan berurutan. Tahap penyaringan darah yang terjadi di glomerulus dan menghasilkan urine primer disebut …","a":"Filtrasi","d":["Reabsorpsi","Augmentasi","Defekasi"],"e":"1. Filtrasi di glomerulus → urine primer. 2. Reabsorpsi di tubulus kontortus proksimal → urine sekunder. 3. Augmentasi di tubulus kontortus distal → urine sesungguhnya."},{"q":"Jika dalam uji laboratorium urine seseorang mengandung glukosa, dapat disimpulkan bahwa terjadi gangguan pada proses …","a":"Reabsorpsi pada tubulus kontortus proksimal","d":["Filtrasi pada glomerulus","Augmentasi pada tubulus kontortus distal","Ekskresi pada pelvis renalis"],"e":"Glukosa pada orang sehat diserap kembali 100% pada tahap reabsorpsi di tubulus proksimal. Bila hormon insulin kurang atau tubulus rusak, glukosa lolos ke urine (diabetes melitus)."},{"q":"Bagian neuron yang berupa serabut sitoplasma panjang dan bertugas menghantarkan impuls listrik dari badan sel menuju ke sel saraf lainnya adalah …","a":"Akson (neurit)","d":["Dendrit","Nukleus","Sinapsis"],"e":"Dendrit menerima impuls menuju badan sel. Akson menghantarkan impuls keluar dari badan sel menuju sel berikutnya atau efektor."},{"q":"Urutan jalannya impuls saraf pada gerak refleks ketika tangan kita tidak sengaja menyentuh benda yang sangat panas adalah …","a":"Reseptor → neuron sensorik → sumsum tulang belakang → neuron motorik → efektor (otot tangan)","d":["Reseptor → neuron motorik → otak besar → neuron sensorik → efektor","Reseptor → neuron sensorik → otak kecil → neuron motorik → efektor","Reseptor → otak besar → sumsum tulang belakang → efektor"],"e":"Gerak refleks tidak melewati pengolahan sadar di otak, melainkan berpusat di sumsum tulang belakang (lengkung refleks) sehingga respons terjadi sangat cepat."},{"q":"Bagian otak yang berfungsi sebagai pusat keseimbangan tubuh, koordinasi posisi, dan kehalusan gerakan otot adalah …","a":"Otak kecil (serebelum)","d":["Otak besar (serebrum)","Batang otak (medula oblongata)","Hipotalamus"],"e":"Serebelum (otak kecil) mengoordinasikan kontraksi otot rangka, menjaga keseimbangan, dan postur tubuh. Kerusakan serebelum membuat gerakan limbung dan kaku."},{"q":"Hormon yang diproduksi oleh kelenjar pankreas dan berfungsi menurunkan kadar gula darah dengan mengubah glukosa menjadi glikogen adalah …","a":"Insulin","d":["Glukagon","Adrenalin","Tiroksin"],"e":"Insulin memicu penyerapan glukosa oleh sel dan penyimpanannya sebagai glikogen di hati dan otot. Glukagon bekerja sebaliknya (meningkatkan gula darah)."},{"q":"Tempat terjadinya proses fertilisasi (peleburan ovum oleh sperma) pada sistem reproduksi wanita normal adalah di …","a":"Tuba falopi (oviduk)","d":["Uterus (rahim)","Ovarium","Vagina"],"e":"Fertilisasi terjadi di sepertiga bagian atas saluran tuba falopi (ampula tuba). Zigot kemudian bergerak turun dan menempel (implantasi) di dinding endometrium rahim."},{"q":"Urutan tingkatan organisasi kehidupan dalam kajian ekologi dari yang paling sederhana hingga paling kompleks adalah …","a":"Individu → Populasi → Komunitas → Ekosistem → Biosfer","d":["Individu → Komunitas → Populasi → Ekosistem → Biosfer","Populasi → Individu → Komunitas → Biosfer → Ekosistem","Sel → Individu → Populasi → Bioma → Ekosistem"],"e":"Individu (satu organisme) → Populasi (kumpulan sejenis) → Komunitas (kumpulan berbagai populasi) → Ekosistem (komunitas + lingkungan abiotik) → Biosfer (seluruh zona kehidupan di bumi)."},{"q":"Dalam sebuah ekosistem padang rumput, jika energi kimia yang dihasilkan produsen sebesar 10.000 kJ, maka menurut hukum perpindahan energi 10% (Lindeman), energi yang diterima konsumen tingkat II (karnivora primer) adalah sekitar …","a":"100 kJ","d":["1.000 kJ","10 kJ","500 kJ"],"e":"Produsen (10.000 kJ) → Konsumen I / herbivora (10% = 1.000 kJ) → Konsumen II / karnivora (10% = 100 kJ)."},{"q":"Interaksi antara bakteri Rhizobium leguminosarum dengan bintil akar tanaman kacang-kacangan (Polong) merupakan contoh simbiosis …","a":"Mutualisme","d":["Komensalisme","Parasitisme","Netralisme"],"e":"Bakteri Rhizobium mengikat nitrogen bebas dari udara untuk tanaman, sedangkan tanaman menyediakan nutrisi karbon dan tempat tinggal bagi bakteri (keduanya saling menguntungkan)."},{"q":"Fenomena ledakan pertumbuhan alga dan eceng gondok di permukaan danau akibat penumpukan sisa pupuk fosfat dan nitrat dari lahan pertanian disebut …","a":"Eutrofikasi","d":["Biomagnifikasi","Hujan asam","Erosi tanah"],"e":"Eutrofikasi adalah pengayaan nutrien berlebih yang memicu algae bloom. Ketika alga mati dan diuraikan bakteri, oksigen terlarut habis (anoksia), menyebabkan kematian massal ikan."},{"q":"Lapisan profil tanah yang paling kaya akan humus dan bahan organik hasil pelapukan daun serta bangkai organisme, sehingga paling subur untuk tanaman, adalah horizon …","a":"Horizon O (organik)","d":["Horizon A (topsoil)","Horizon B (subsoil)","Horizon C (bahan induk)"],"e":"Horizon O terletak di lapisan paling atas, tersusun dari serasah organik dan humus yang sangat subur."},{"q":"Gas buang dari kendaraan dan industri yang paling berperan memicu terjadinya pemanasan global melalui penyerapan radiasi inframerah bumi adalah …","a":"Karbon dioksida (CO₂) dan Metana (CH₄)","d":["Oksigen (O₂) dan Nitrogen (N₂)","Sulfur dioksida (SO₂) dan Ozon (O₃)","Klorofluorokarbon (CFC) saja"],"e":"CO₂ dan CH₄ adalah gas rumah kaca utama yang menyerap radiasi termal bumi dan memantulkannya kembali ke permukaan sehingga meningkatkan suhu rata-rata bumi."},{"q":"Karakteristik khas organisme yang digolongkan ke dalam Kingdom Fungi (jamur) menurut sistem klasifikasi 5 kingdom adalah …","a":"Eukariotik, berdinding sel dari zat kitin, dan heterotrof (tidak berklorofil)","d":["Prokariotik, berklorofil, dan autotrof","Eukariotik, dinding sel dari selulosa, dan fotosintesis","Prokariotik, uniseluler, dan berflagela"],"e":"Jamur bersifat eukariotik, berdinding sel dari kitin (bukan selulosa), tidak memiliki klorofil sehingga menyerap nutrisi secara heterotrof (saprofit/parasit)."},{"q":"Penulisan nama ilmiah hewan singa berdasarkan prinsip Binomial Nomenklatur yang benar adalah …","a":"Panthera leo (atau dicetak miring / garis bawah terpisah)","d":["panthera leo","Panthera Leo","Panthera-leo"],"e":"Kata pertama adalah genus (huruf awal kapital), kata kedua adalah penunjuk spesies (huruf kecil semua), dan keduanya dicetak miring (italic) atau digarisbawahi terpisah."},{"q":"Persilangan antara tanaman ercis bunga merah (MM) dengan bunga putih (mm) menghasilkan keturunan F1 seluruhnya berwarna merah muda (Mm). Sifat gen warna merah terhadap putih tersebut adalah …","a":"Intermediet (dominansi tak lengkap)","d":["Dominan penuh","Resesif","Kodominan"],"e":"Intermediet terjadi jika alel dominan tidak menutupi alel resesif secara penuh, sehingga individu heterozigot (Mm) memunculkan sifat perpaduan (merah muda)."},{"q":"Jika tanaman ercis F1 berbunga merah muda (Mm) disilangkan dengan sesamanya, maka perbandingan fenotipe keturunan F2 yang dihasilkan adalah …","a":"1 merah : 2 merah muda : 1 putih","d":["3 merah : 1 putih","9 merah : 3 merah muda : 3 putih : 1 kuning","1 merah : 1 putih"],"e":"Mm × Mm menghasilkan genotipe: 1 MM (merah) : 2 Mm (merah muda) : 1 mm (putih). Rasio fenotipe = 1 : 2 : 1."},{"q":"Pada persilangan dihibrid antara tanaman ercis biji bulat kuning (BbKk) dengan tanaman ercis biji keriput hijau (bbkk), perbandingan fenotipe keturunannya adalah …","a":"1 bulat kuning : 1 bulat hijau : 1 keriput kuning : 1 keriput hijau","d":["9 : 3 : 3 : 1","3 : 1","1 : 2 : 1"],"e":"Ini adalah uji silang (test cross) dihibrid: BbKk × bbkk menghasilkan gamet BK, Bk, bK, bk disilangkan dengan bk, menghasilkan rasio fenotipe 1 : 1 : 1 : 1."},{"q":"Seorang laki-laki berpenglihatan normal (Xʸ) menikah dengan seorang wanita pembawa sifat buta warna (carrier, XᵇX). Peluang anak laki-laki mereka menderita buta warna adalah …","a":"50% dari anak laki-laki","d":["25% dari anak laki-laki","100% dari anak laki-laki","0% dari anak laki-laki"],"e":"Gamet ayah: X dan Y. Gamet ibu: X dan Xᵇ. Keturunan anak laki-laki: XY (normal 50%) dan XᵇY (buta warna 50%). Jadi 50% dari anak laki-laki menderita buta warna."},{"q":"Kelainan genetik terpaut kromosom X di mana darah penderita sukar membeku saat terjadi luka akibat kekurangan faktor pembeku darah adalah …","a":"Hemofilia","d":["Anemia sel sabit","Thalasemia","Leukemia"],"e":"Hemofilia disebabkan mutasi resesif pada gen pengkode faktor pembekuan darah (faktor VIII atau IX) yang terpaut pada kromosom X."},{"q":"Mikroorganisme yang berperan dalam proses fermentasi kedelai menjadi tempe adalah jamur jenis …","a":"Rhizopus oligosporus dan Rhizopus oryzae","d":["Saccharomyces cerevisiae","Acetobacter xylinum","Lactobacillus bulgaricus"],"e":"Jamur kapang Rhizopus menghasilkan hifa putih yang mengikat butiran kedelai menjadi satu massa kompak serta menghasilkan enzim proteolitik."},{"q":"Dalam bioteknologi pembuatan nata de coco dari air kelapa, bakteri yang dimanfaatkan untuk membentuk jalinan serat selulosa kenyal adalah …","a":"Acetobacter xylinum","d":["Lactobacillus casei","Streptococcus thermophilus","Escherichia coli"],"e":"Acetobacter xylinum mempolimerisasi glukosa dari air kelapa menjadi matriks selulosa murni bertekstur kenyal."},{"q":"Produksi hormon insulin sintetis bagi penderita diabetes secara massal dilakukan dengan memanfaatkan bakteri Escherichia coli melalui teknik bioteknologi modern berupa …","a":"Rekayasa genetika (teknologi DNA rekombinan / plasmid)","d":["Fusi sel (hibridoma)","Kultur jaringan","Kloning embrio"],"e":"Gen pengkode insulin manusia disisipkan ke plasmid bakteri E. coli. Bakteri yang telah direkayasa dikultur untuk memproduksi insulin manusia secara efisien."},{"q":"Prinsip dasar perbanyakan tanaman unggul melalui teknik kultur jaringan adalah pemanfaatan sifat sel tumbuhan yang disebut …","a":"Totipotensi","d":["Diferensiasi","Spesialisasi","Pluripotensi"],"e":"Totipotensi adalah kemampuan setiap sel tumbuhan utuh yang masih hidup untuk tumbuh dan berkembang menjadi individu tanaman lengkap yang identik jika diberi nutrisi dan hormon yang sesuai."},{"q":"Salah satu contoh kekhawatiran dampak negatif pelepasan tanaman transgenik (GMO) ke lingkungan alam adalah …","a":"Penyebaran serbuk sari transgenik ke gulma liar sehingga menghasilkan 'superweed' yang kebal pestisida","d":["Hasil panen pangan melimpah","Menurunkan resistensi hama tanaman","Mempercepat kepunahan mikroba tanah penghasil antibiotik"],"e":"Gen resistensi herbisida dapat berpindah secara silang ke kerabat liar gulma (gen flow), menciptakan gulma super yang sangat sulit diberantas."},{"q":"Vaksin generasi baru yang dibuat dengan mengisolasi potongan materi genetik virus pengkode protein spike tertentu agar memicu pembentukan antibodi tubuh termasuk aplikasi bioteknologi bidang …","a":"Kesehatan (bioteknologi merah)","d":["Pertanian (bioteknologi hijau)","Industri (bioteknologi putih)","Kelautan (bioteknologi biru)"],"e":"Bioteknologi merah (red biotechnology) berfokus pada bidang medis, farmasi, pengembangan obat, dan vaksin."}]},{"title":"Paket 6: IPA ACL #11 (Grand Tryout Lengkap IPA)","sub":"Simulasi Ujian Resmi IPA ACL #11 Mencakup Seluruh 17 Materi Guide Book","kisi":"Simulasi komprehensif 40 soal standar kompetisi nasional ACL mengintegrasikan Fisika, Kimia Dasar, Biologi, Ekologi, IPBA, dan Bioteknologi.","mapel":"ipa","icon":"🌟","qs":[{"q":"Sebuah balok diukur dengan jangka sorong. Skala utama menunjukkan 4,3 cm dan garis nonius ke-7 berimpit dengan skala utama. Hasil pengukuran panjang balok adalah …","a":"4,37 cm","d":["4,30 cm","4,70 cm","4,47 cm"],"e":"Hasil = 4,3 cm + (7 × 0,01 cm) = 4,3 cm + 0,07 cm = 4,37 cm."},{"q":"Sebuah mobil mainan bergerak lurus dengan kecepatan konstan 12 m/s selama 10 sekon, kemudian direm dengan perlambatan 3 m/s² sampai berhenti. Waktu total perjalanan mobil tersebut adalah …","a":"14 sekon","d":["12 sekon","16 sekon","10 sekon"],"e":"Waktu GLB = 10 s. Waktu pengereman t = (vt - v0) / a = (0 - 12) / (-3) = 4 s. Waktu total = 10 + 4 = 14 sekon."},{"q":"Dua gaya F1 = 40 N ke arah kanan dan F2 = 15 N ke arah kiri bekerja pada benda bermassa 5 kg di atas lantai licin. Percepatan benda tersebut adalah …","a":"5 m/s² ke kanan","d":["11 m/s² ke kanan","5 m/s² ke kiri","25 m/s² ke kanan"],"e":"ΣF = 40 - 15 = 25 N ke kanan. a = ΣF / m = 25 / 5 = 5 m/s² ke kanan."},{"q":"Sebuah benda bermassa 4 kg diangkat ke atas meja setinggi 80 cm (g = 10 m/s²). Usaha yang dilakukan terhadap benda tersebut adalah …","a":"32 joule","d":["320 joule","3,2 joule","40 joule"],"e":"h = 80 cm = 0,8 m. W = m × g × h = 4 × 10 × 0,8 = 32 J."},{"q":"Sebuah tuas memiliki lengan beban 20 cm dan lengan kuasa 100 cm. Jika beban yang hendak diangkat 500 N, maka kuasa yang diperlukan adalah …","a":"100 N","d":["250 N","50 N","150 N"],"e":"F × Lk = W × Lb → F × 100 = 500 × 20 → 100F = 10.000 → F = 100 N."},{"q":"Sebuah bejana berbentuk pipa U berisi air (massa jenis 1.000 kg/m³). Pada salah satu kaki dituangkan minyak setinggi 10 cm sehingga terjadi selisih ketinggian air 8 cm. Massa jenis minyak tersebut adalah …","a":"800 kg/m³","d":["750 kg/m³","900 kg/m³","850 kg/m³"],"e":"Hukum hidrostatis pipa U: ρ_minyak × h_minyak = ρ_air × h_air → ρ_minyak × 10 = 1.000 × 8 → ρ_minyak = 800 kg/m³."},{"q":"Sebuah batu ditimbang di udara beratnya 50 N. Ketika dicelupkan seluruhnya ke dalam air (massa jenis 1.000 kg/m³, g = 10 m/s²), berat semu batu menjadi 30 N. Volume batu tersebut adalah …","a":"0,002 m³","d":["0,003 m³","0,005 m³","0,020 m³"],"e":"Gaya apung Fa = W_udara - W_air = 50 - 30 = 20 N. Fa = ρ_air × g × V → 20 = 1.000 × 10 × V → V = 20 / 10.000 = 0,002 m³ (atau 2.000 cm³)."},{"q":"Sebuah batang besi bermassa 2 kg dipanaskan sehingga suhunya naik dari 25°C menjadi 75°C. Jika kalor jenis besi 450 J/kg°C, kalor yang diserap batang besi tersebut adalah …","a":"45.000 J","d":["90.000 J","22.500 J","4.500 J"],"e":"Q = m × c × ΔT = 2 × 450 × (75 - 25) = 900 × 50 = 45.000 J."},{"q":"Fenomena terjadinya angin laut pada siang hari di kawasan pesisir pantai terjadi karena …","a":"Daratan lebih cepat panas dibandingkan lautan, sehingga udara panas di daratan naik dan digantikan udara dingin dari laut","d":["Lautan lebih cepat panas dibandingkan daratan, sehingga udara laut naik","Gravitasi bulan menarik massa udara di atas permukaan air laut","Suhu air laut selalu lebih tinggi daripada daratan di siang hari"],"e":"Kalor jenis daratan lebih kecil daripada air laut sehingga daratan cepat panas pada siang hari. Udara panas daratan bertekanan rendah dan naik, memicu hembusan konveksi udara sejuk dari laut ke darat (angin laut)."},{"q":"Sebuah gelombang bunyi merambat di udara dengan panjang gelombang 68 cm. Jika cepat rambat bunyi di udara saat itu 340 m/s, frekuensi bunyi tersebut adalah …","a":"500 Hz","d":["250 Hz","1.000 Hz","231 Hz"],"e":"λ = 68 cm = 0,68 m. f = v / λ = 340 / 0,68 = 500 Hz."},{"q":"Dua garpu tala berfrekuensi sama didekatkan. Ketika garpu tala A dipukul hingga bergetar, garpu tala B ikut bergetar. Peristiwa ini disebut …","a":"Resonansi","d":["Refraksi","Interferensi","Difraksi"],"e":"Resonansi adalah peristiwa ikut bergetarnya suatu benda karena pengaruh getaran benda lain yang memiliki frekuensi alami sama."},{"q":"Sebuah lilin diletakkan di depan cermin cembung pada jarak 20 cm. Jika jarak fokus cermin cembung 20 cm, sifat bayangan yang terbentuk adalah …","a":"Maya, tegak, diperkecil","d":["Nyata, terbalik, sama besar","Nyata, terbalik, diperkecil","Maya, tegak, diperbesar"],"e":"Cermin cembung SELALU menghasilkan bayangan maya, tegak, dan diperkecil untuk posisi benda di depan cermin di manapun."},{"q":"Lup (kaca pembesar) dengan panjang fokus 5 cm digunakan oleh seseorang bermata normal (Sn = 25 cm) dengan mata berakomodasi maksimum. Perbesaran anguler yang dihasilkan adalah …","a":"6 kali","d":["5 kali","4 kali","7 kali"],"e":"Akomodasi maksimum: M = (Sn / f) + 1 = (25 / 5) + 1 = 5 + 1 = 6 kali."},{"q":"Kaca yang digosokkan dengan kain sutra akan bermuatan listrik positif karena …","a":"Elektron berpindah dari kaca ke kain sutra","d":["Elektron berpindah dari sutra ke kaca","Proton berpindah dari kaca ke sutra","Kaca menyerap neutron dari udara"],"e":"Kain sutra menarik elektron lebih kuat, sehingga elektron pada kaca berpindah ke kain sutra, menyebabkan kaca kekurangan elektron (positif)."},{"q":"Dua buah lampu masing-masing bertuliskan 220 V / 40 W dan 220 V / 60 W dihubungkan secara paralel ke sumber tegangan 220 V. Daya total yang dikonsumsi kedua lampu adalah …","a":"100 W","d":["24 W","50 W","200 W"],"e":"Pada tegangan normal paralel, daya masing-masing tetap bekerja optimal: P_total = P1 + P2 = 40 + 60 = 100 W."},{"q":"Alat pengaman pada instalasi listrik rumah yang bekerja otomatis memutuskan rangkaian jika terjadi kelebihan beban atau korsleting adalah …","a":"MCB (Miniature Circuit Breaker) / Sekring","d":["Stop kontak","Voltmeter","Saklar tunggal"],"e":"MCB atau sekring memutuskan aliran arus listrik saat arus melebihi kapasitas batas aman untuk mencegah kebakaran."},{"q":"Kutub magnet bumi yang terletak di sekitar kutub utara geografis bumi sebenarnya adalah …","a":"Kutub selatan magnet bumi","d":["Kutub utara magnet bumi","Kutub netral magnet bumi","Kutub barat magnet bumi"],"e":"Karena kutub utara jarum kompas selalu tertarik menunjuk ke utara bumi, maka di dekat kutub utara geografis bumi terdapat kutub selatan magnetik bumi."},{"q":"Timbulnya gaya gerak listrik (GGL) induksi pada kumparan ketika terjadi perubahan fluks magnetik pertama kali dirumuskan oleh …","a":"Michael Faraday","d":["Hans Christian Oersted","Andre Marie Ampere","James Prescott Joule"],"e":"Hukum Induksi Faraday menyatakan bahwa GGL induksi sebanding dengan laju perubahan fluks magnetik yang dilingkupi kumparan."},{"q":"Sebuah trafo memiliki efisiensi 80%. Jika daya masukan (primer) sebesar 100 watt, maka daya keluaran (sekunder) adalah …","a":"80 watt","d":["100 watt","125 watt","85 watt"],"e":"Efisiensi η = (Ps / Pp) × 100% → 80% = (Ps / 100) × 100% → Ps = 80 W."},{"q":"Peristiwa alam pasang air laut tertinggi (pasang purnama / spring tide) terjadi ketika posisi …","a":"Matahari, Bulan, dan Bumi berada dalam satu garis lurus (saat Bulan Baru dan Bulan Purnama)","d":["Bulan dan Matahari membentuk sudut 90° terhadap Bumi","Bumi berada di titik aphelion","Bulan berada pada fase kuartir pertama"],"e":"Saat satu garis lurus (syzygy), gaya gravitasi bulan dan matahari saling memperkuat sehingga menghasilkan pasang air laut maksimum (pasang purnama)."},{"q":"Lapisan atmosfer bumi yang banyak mengandung molekul ozon (O₃) dan berfungsi menyerap radiasi ultraviolet berbahaya dari matahari adalah …","a":"Stratosfer","d":["Troposfer","Mesosfer","Termosfer"],"e":"Lapisan ozon terkonsentrasi di lapisan stratosfer (ketinggian 15-35 km) dan menyaring sinar UV-B matahari."},{"q":"Organel sel yang berperan penting dalam proses sintesis protein adalah …","a":"Ribosom","d":["Lisosom","Vakuola","Peroksisom"],"e":"Ribosom bertugas merangkai asam amino menjadi rantai polipeptida/protein berdasarkan kode genetik mRNA."},{"q":"Organel sel yang berisi enzim hidrolitik untuk pencernaan intraseluler dan perombakan organel rusak adalah …","a":"Lisosom","d":["Badan Golgi","Sentriol","Mitokondria"],"e":"Lisosom menghasilkan enzim pencerna intraseluler (hidrolase asam) dan memfagosit zat asing atau organel tua."},{"q":"Pada daun tumbuhan, jaringan yang memiliki banyak kloroplas dan paling aktif melakukan proses fotosintesis adalah …","a":"Jaringan palisade (tiang)","d":["Jaringan epidermis atas","Jaringan spons (bunga karang)","Jaringan kutikula"],"e":"Jaringan palisade tersusun rapat dan kaya kloroplas, menjadi pusat utama fotosintesis pada daun dikotil."},{"q":"Reaksi kimia fotosintesis yang berlangsung di kloroplas menghasilkan molekul berupa …","a":"Glukosa (C₆H₁₂O₆) dan gas oksigen (O₂)","d":["Karbon dioksida (CO₂) dan air (H₂O)","Asam laktat dan energi ATP","Alkohol dan karbon monoksida"],"e":"Persamaan fotosintesis: 6 CO₂ + 6 H₂O + cahaya → C₆H₁₂O₆ + 6 O₂."},{"q":"Uji makanan menggunakan larutan Biuret menghasilkan perubahan warna menjadi ungu. Hal ini menandakan makanan tersebut mengandung …","a":"Protein","d":["Glukosa","Amilum","Lemak"],"e":"Biuret bereaksi dengan ikatan peptida protein menghasilkan senyawa kompleks berwarna ungu."},{"q":"Bagian darah manusia yang tidak memiliki inti sel, berbentuk cakram bikonkaf, dan mengandung hemoglobin adalah …","a":"Eritrosit (sel darah merah)","d":["Leukosit","Trombosit","Limfosit"],"e":"Eritrosit berbentuk bikonkaf tanpa inti pada mamalia dewasa, berfungsi optimal mengikat oksigen lewat hemoglobin."},{"q":"Penyakit kelainan pembuluh darah vena yang melebar dan berkelok-kelok, umumnya terjadi di betis akibat katup pembuluh darah yang rusak, disebut …","a":"Varises","d":["Aterosklerosis","Hipotensi","Trombosis"],"e":"Varises adalah pelebaran vena superfisial karena tekanan balik darah dan katup vena yang melemah."},{"q":"Otot pernapasan utama yang berkontraksi mendatar saat inspirasi pada pernapasan perut adalah …","a":"Diafragma","d":["Otot antartulang rusuk luar","Otot perut","Otot trakea"],"e":"Saat inspirasi pernapasan perut, diafragma berkontraksi dan mendatar, memperbesar volume rongga dada sehingga udara masuk."},{"q":"Penyakit radang saluran pernapasan yang disebabkan oleh infeksi bakteri Mycobacterium tuberculosis dan menyebabkan batuk berdarah adalah …","a":"TBC (Tuberkulosis)","d":["Asma","Bronkitis","Pneumonia"],"e":"Bakteri Mycobacterium tuberculosis menginfeksi alveolus dan jaringan paru, membentuk bintik-bintik tuberkel."},{"q":"Pada nefron ginjal, proses penyerapan kembali zat-zat yang masih berguna (seperti glukosa dan asam amino) dari urine primer terjadi pada …","a":"Tubulus kontortus proksimal","d":["Glomerulus","Tubulus kontortus distal","Lengkung Henle descending"],"e":"Tubulus proksimal mereabsorpsi hampir seluruh glukosa, asam amino, serta sebagian besar ion natrium dan air."},{"q":"Bagian otak manusia yang berfungsi sebagai pusat pengaturan denyut jantung, tekanan darah, dan pernapasan otonom adalah …","a":"Medula oblongata (sumsum lanjutan)","d":["Serebrum","Serebelum","Talamus"],"e":"Medula oblongata mengontrol pusat kardiovaskular dan ritme pernapasan dasar secara tak sadar."},{"q":"Kelainan hormon di mana terjadi kekurangan produksi hormon ADH (Antidiuretik) sehingga penderita buang air kecil dalam jumlah sangat banyak dan encer disebut …","a":"Diabetes insipidus","d":["Diabetes melitus","Gagal ginjal kronis","Nefritis"],"e":"Diabetes insipidus disebabkan defisiensi ADH dari hipofisis posterior, menurunkan reabsorpsi air di tubulus ginjal."},{"q":"Organ reproduksi pria yang berfungsi sebagai tempat produksi sel sperma dan hormon testosteron adalah …","a":"Testis","d":["Epididimis","Vas deferens","Prostat"],"e":"Testis mengandung tubulus seminiferus (tempat pembentukan sperma) dan sel Leydig (penghasil testosteron)."},{"q":"Pada piramida biomassa di ekosistem darat, tingkatan trofik yang memiliki biomassa total terbesar adalah …","a":"Produsen (tumbuhan hijau)","d":["Konsumen primer (herbivora)","Konsumen sekunder","Konsumen puncak"],"e":"Pada ekosistem darat, piramida biomassa tegak di mana produsen memiliki biomassa total paling melimpah."},{"q":"Tanaman anggrek yang menempel pada batang pohon mangga untuk mendapatkan cahaya tanpa menyerap nutrisi inang merupakan contoh simbiosis …","a":"Komensalisme","d":["Parasitisme","Mutualisme","Predasi"],"e":"Anggrek untung karena mendapat tempat hidup dan sinar, sedangkan pohon mangga tidak dirugikan dan tidak diuntungkan."},{"q":"Senyawa CFC (Klorofluorokarbon) yang lepas ke stratosfer dapat merusak lingkungan karena memicu terjadinya …","a":"Penipisan lapisan ozon","d":["Eutrofikasi perairan","Hujan asam di perkotaan","Peningkatan gas oksigen"],"e":"Klorin radikal bebas dari penguraian CFC mengkatalisis penguraian molekul ozon (O₃) menjadi O₂."},{"q":"Jika seorang laki-laki penderita hemofilia (XʰY) menikah dengan wanita normal homozigot (XᴴXᴴ), maka kemungkinan anak-anak mereka adalah …","a":"Semua anak perempuan pembawa sifat (carrier) dan semua anak laki-laki normal","d":["Semua anak laki-laki hemofilia","50% anak perempuan hemofilia","Semua anak normal tidak ada pembawa sifat"],"e":"Gamet ayah: Xʰ dan Y. Gamet ibu: Xᴴ. Anak perempuan: XᴴXʰ (100% carrier normal). Anak laki-laki: XᴴY (100% normal)."},{"q":"Pembuatan yoghurt dari susu segar memanfaatkan bakteri asam laktat berupa …","a":"Lactobacillus bulgaricus dan Streptococcus thermophilus","d":["Rhizopus oryzae","Acetobacter xylinum","Saccharomyces cerevisiae"],"e":"Kedua bakteri asam laktat memfermentasi gula laktosa susu menjadi asam laktat yang menggumpalkan protein susu."},{"q":"Teknologi perkembangbiakan tanaman dengan cara menumbuhkan jaringan daun/tunas pada media agar bernutrisi steril di dalam tabung kaca disebut …","a":"Kultur jaringan","d":["Kloning genetik","DNA rekombinan","Inseminasi buatan"],"e":"Kultur jaringan memanfaatkan eksplan jaringan sel tumbuhan yang dikultur secara aseptik menjadi kalus dan planlet utuh."}]}];
+
 /* ============ state & UI ============ */
 const ADMIN_PIN = '170170';
 function isAuthed(){ return sessionStorage.getItem('rekap_pin_ok')==='1' }
-const S={screen:'home',name:ls.get(NKEY)||'',mapel:ls.get('latihsoal-mapel')==='ipa'?'ipa':'mat',kelas:[0,7,8,9].includes(+ls.get('latihsoal-kelas'))&&ls.get('latihsoal-kelas')!==null?+ls.get('latihsoal-kelas'):7,sheet:null,gantiNama:false,mode:'latihan',count:10,rekapName:'semua',rekapMapel:'semua',armed:null,pinModal:false,pinErr:''};
+const S={screen:'home',name:ls.get(NKEY)||'',mapel:ls.get('latihsoal-mapel')==='ipa'?'ipa':'mat',kelas:[0,7,8,9].includes(+ls.get('latihsoal-kelas'))&&ls.get('latihsoal-kelas')!==null?+ls.get('latihsoal-kelas'):7,sheet:null,gantiNama:false,mode:'latihan',count:10,rekapName:'semua',rekapMapel:'semua',armed:null,pinModal:false,pinErr:'',sofiyahRule:ls.get('latihsoal-sofi-rule')||'semifinal',sofiyahMode:ls.get('latihsoal-sofi-mode')||'ujian'};
 let Z=null,timerId=null;
 const app=document.getElementById('app');
 function refresh(){if(S.screen==='rekap')render();else if(S.screen==='home'){if(S.name&&!S.gantiNama)render();else{const dl=document.getElementById('names');if(dl)dl.innerHTML=namesOpts()}}}
 const names=()=>[...new Set(records.map(r=>r.nama).filter(Boolean))].sort();
 const namesOpts=()=>names().map(n=>`<option value="${esc(n)}"></option>`).join('');
-function setTab(){document.getElementById('tab-latihan').setAttribute('aria-selected',S.screen!=='rekap');document.getElementById('tab-rekap').setAttribute('aria-selected',S.screen==='rekap');document.body.dataset.mapel=S.screen==='home'?S.mapel:(Z?Z.mapel:S.mapel)}
+function setTab(){
+  document.getElementById('tab-latihan')?.setAttribute('aria-selected',S.screen==='home');
+  document.getElementById('tab-sofiyah')?.setAttribute('aria-selected',S.screen==='sofiyah');
+  document.getElementById('tab-rekap')?.setAttribute('aria-selected',S.screen==='rekap');
+  document.body.dataset.mapel=S.screen==='home'?S.mapel:(Z?Z.mapel:S.mapel);
+}
 function fmtTime(s){s=Math.max(0,Math.round(s));const m=Math.floor(s/60),x=s%60;return `${m}:${String(x).padStart(2,'0')}`}
 function gradeCls(v){return v>=80?'g-hi':v>=60?'g-mid':'g-lo'}
 
@@ -1475,7 +1920,7 @@ function progres(){const agg={};records.filter(r=>r.nama===S.name&&!r.catatan?.s
 function renderHome(){
   if(!S.name||S.gantiNama){app.innerHTML=`<section class="sheet welcome">
     <div class="welcome-art hias">${HIAS.mat}${HIAS.ipa}</div>
-    <h2>Selamat datang di Latih Soal! 👋</h2><p class="hint">Latihan Matematika dan IPA SMP kelas 7–9, sesuai buku paket.</p>
+    <h2>Selamat datang di Latihan Soal! 👋</h2><p class="hint">Latihan Matematika dan IPA SMP kelas 7–9, sesuai buku paket.</p>
     <form id="fNama" class="nama-form"><label for="nama" class="label">Siapa yang mau latihan?</label>
       <input type="text" id="nama" list="names" placeholder="Tulis namamu" value="${esc(S.name)}" autocomplete="off" required><datalist id="names">${namesOpts()}</datalist>
       <button class="btn primary" type="submit">Lanjut</button></form></section>`;
@@ -1513,7 +1958,7 @@ function renderPinModal(){
   return `<div class="backdrop" data-pinclose="1"></div><div class="bsheet" role="dialog" aria-modal="true" aria-labelledby="pinTitle" style="max-width:380px;text-align:center;padding:22px 20px calc(20px + env(safe-area-inset-bottom,0px))">
     <div class="grip" aria-hidden="true"></div>
     <div style="font-size:2.8rem;line-height:1;margin:8px 0 4px">🔐</div>
-    <h3 id="pinTitle" style="font-size:1.35rem;font-weight:800;margin:0">Akses Khusus Mas Syuro</h3>
+    <h3 id="pinTitle" style="font-size:1.35rem;font-weight:800;margin:0">Akses Khusus Orang Tua</h3>
     <p class="hint" style="margin:6px 0 16px;font-size:0.92rem">Halaman rekap nilai dikunci. Masukkan PIN untuk membuka.</p>
     <form id="fPin" style="display:grid;gap:12px;width:100%">
       <div>
@@ -1528,7 +1973,185 @@ function renderPinModal(){
     </form>
   </div>`}
 
+
+function renderSofiyah(){
+  const isSofi = S.name && S.name.trim().toLowerCase() === 'sofiyah';
+  const bestScores = {};
+  records.filter(r => r.nama && r.nama.toLowerCase() === (S.name ? S.name.toLowerCase() : 'sofiyah')).forEach(r => {
+    if (r.catatan) {
+      for (let i = 1; i <= 6; i++) {
+        if (r.catatan.includes('Paket ' + i)) {
+          bestScores[i] = Math.max(bestScores[i] || 0, r.skor || 0);
+        }
+      }
+    }
+  });
+
+  const rule = S.sofiyahRule || 'semifinal';
+  const mode = S.sofiyahMode || 'ujian';
+
+  const paketCards = PAKET_SOFIYAH.map((p, idx) => {
+    const pNum = idx + 1;
+    const isMat = p.mapel === 'mat';
+    const best = bestScores[pNum];
+    return `
+      <div class="sofi-pkg-card ${isMat ? 'mat' : 'ipa'}">
+        <div class="spc-head">
+          <span class="tag ${isMat ? 'mat' : 'ipa'}">${isMat ? '📐 Matematika' : '🔬 IPA'}</span>
+          <span class="hint" style="font-size:0.8rem;font-weight:700">⏱️ 90 Menit · ${p.qs.length} Soal</span>
+        </div>
+        <div class="spc-icon-title">
+          <span class="spc-icon">${p.icon}</span>
+          <div class="spc-info">
+            <h4>${esc(p.title)}</h4>
+            <p class="spc-sub">${esc(p.sub)}</p>
+          </div>
+        </div>
+        <div class="spc-kisi">
+          <b>KISI-KISI ACL #11:</b>
+          ${esc(p.kisi)}
+        </div>
+        <div class="spc-foot">
+          <div>
+            ${best !== undefined ? `<span class="spc-badge-best">Terbaik: ${best}%</span>` : `<span class="hint" style="font-size:0.82rem">Belum dicoba</span>`}
+          </div>
+          <button class="spc-btn" data-sofiyah-pkg="${idx}">Mulai Paket ${pNum} ➔</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  app.innerHTML = `<section class="sheet sofi-sheet">
+    <div class="sofi-head-banner">
+      <div>
+        <span class="sofi-tag-gold">👑 RUANG PERSIAPAN KHUSUS SOFIYAH</span>
+        <h2>Halo, ${esc(S.name || 'Sofiyah')}! 🏆</h2>
+        <p>Persiapkan diri menjadi juara <b>Air-LANGGA Champion League (ACL) #11</b> Tingkat SMP Nasional.</p>
+      </div>
+      <div>
+        ${!isSofi ? `<button class="btn primary" id="btnSetSofiyah">⭐ Set Nama: Sofiyah</button>` : `<span class="pill" style="background:#fef3c7;color:#92400e;border:1.5px solid #f59e0b;font-weight:800;padding:6px 14px">✨ Profil Sofiyah Aktif</span>`}
+      </div>
+    </div>
+
+    <!-- Pedoman Teknis & Aturan Penilaian ACL #11 -->
+    <div class="acl-rules-card">
+      <div class="arc-head">
+        <h3>📋 Pedoman Teknis &amp; Aturan Penilaian ACL #11</h3>
+        <span class="pill k">BMB Air-LANGGA</span>
+      </div>
+      <div class="arc-grid">
+        <div class="arc-box">
+          <b class="title">📅 JADWAL KOMPETISI</b>
+          <ul>
+            <li><b>Batas Daftar:</b> 10 Oktober 2026</li>
+            <li><b>Penyisihan:</b> 12 – 16 Oktober 2026 (CBT Online)</li>
+            <li><b>Semifinal:</b> 22 – 24 Oktober 2026 (39 Cabang BMB)</li>
+            <li><b>Final:</b> 31 Oktober 2026 (Aula FMIPA UM Malang)</li>
+          </ul>
+        </div>
+        <div class="arc-box">
+          <b class="title">⚖️ SISTEM PENILAIAN RESMI</b>
+          <ul>
+            <li><b>Penyisihan:</b> Benar <b>+2,5</b> | Salah <b>0</b> | Kosong <b>0</b></li>
+            <li><b>Semifinal &amp; Final:</b> Benar <b>+4</b> | Salah <b>-1</b> | Kosong <b>0</b></li>
+            <li><b>Durasi:</b> 90 menit (IPA 40 soal, Mat 30 soal)</li>
+          </ul>
+        </div>
+        <div class="arc-box">
+          <b class="title">🎁 REWARD JUARA NASIONAL</b>
+          <ul>
+            <li>🥇 <b>Juara 1:</b> Rp 2.500.000 + Piala + Sertifikat</li>
+            <li>🥈 <b>Juara 2:</b> Rp 2.000.000 + Piala + Sertifikat</li>
+            <li>🥉 <b>Juara 3:</b> Rp 1.500.000 + Piala + Sertifikat</li>
+            <li>🎖️ <b>Harapan 1 &amp; 2:</b> Rp 1.000.000 &amp; Rp 500.000</li>
+          </ul>
+        </div>
+      </div>
+      <div class="rule-toggle-row">
+        <div style="flex:1;min-width:220px">
+          <span class="label" style="display:block;margin-bottom:6px">Aturan Penilaian Aktif:</span>
+          <div class="seg">
+            <button data-sofi-rule="semifinal" aria-pressed="${rule==='semifinal'}">Semifinal/Final (+4 / -1 / 0)</button>
+            <button data-sofi-rule="penyisihan" aria-pressed="${rule==='penyisihan'}">Penyisihan (+2,5 / 0 / 0)</button>
+          </div>
+        </div>
+        <div style="flex:1;min-width:220px">
+          <span class="label" style="display:block;margin-bottom:6px">Mode Pengerjaan:</span>
+          <div class="seg">
+            <button data-sofi-mode="ujian" aria-pressed="${mode==='ujian'}">⏱️ Ujian ACL (90 Menit)</button>
+            <button data-sofi-mode="latihan" aria-pressed="${mode==='latihan'}">🙂 Latihan Santai (Ada Pembahasan)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 Paket Soal -->
+    <div class="sec">
+      <div class="row" style="justify-content:space-between;align-items:center">
+        <h2>Daftar 6 Paket Latihan Sofiyah</h2>
+        <span class="hint">Total 210 Soal Lengkap Pembahasan</span>
+      </div>
+      <div class="sofi-pkgs-grid">
+        ${paketCards}
+      </div>
+    </div>
+  </section>`;
+}
+
+function startSofiyahPaket(idx){
+  document.getElementById('screenShield')?.classList.remove('active');
+  let nm = (S.name || '').trim();
+  if(!nm){
+    nm = 'Sofiyah';
+    S.name = 'Sofiyah';
+    ls.set(NKEY, 'Sofiyah');
+  }
+  const p = PAKET_SOFIYAH[idx];
+  if(!p) return;
+
+  const rule = S.sofiyahRule || 'semifinal';
+  const mode = S.sofiyahMode || 'ujian';
+  const limit = mode === 'ujian' ? 90 * 60 : null;
+
+  const qs = p.qs.map(item => {
+    const opts = shuffle([item.a, ...item.d]);
+    return {
+      t: p.mapel === 'mat' ? 'bulat' : 'besaran',
+      tag: p.mapel === 'mat' ? 'Matematika ACL' : 'IPA ACL',
+      q: item.q,
+      o: opts,
+      ans: opts.indexOf(item.a),
+      e: item.e,
+      img: item.img || null
+    };
+  });
+
+  Z = {
+    mapel: p.mapel,
+    mode: mode,
+    name: nm,
+    qs,
+    ansr: Array(qs.length).fill(null),
+    i: 0,
+    start: Date.now(),
+    limit: limit,
+    confirm: false,
+    saved: false,
+    topics: [p.mapel === 'mat' ? 'bulat' : 'besaran'],
+    aclRule: rule,
+    paketIdx: idx,
+    paketName: 'Paket ' + (idx + 1) + ' (' + p.title + ')'
+  };
+
+  S.screen = 'quiz';
+  render();
+  window.scrollTo(0, 0);
+  clearInterval(timerId);
+  timerId = setInterval(tick, 1000);
+}
+
 function startQuiz(){
+  document.getElementById('screenShield')?.classList.remove('active');
   const nm=S.name.trim();if(!nm){S.gantiNama=true;render();return}
   ls.set(NKEY,nm);
   const ids=(S.sheet?.ids||[]).filter(id=>TOPIC[id]);if(!ids.length)return;S.sheet=null;
@@ -1557,9 +2180,15 @@ function renderQuiz(){
     ${Z.confirm?`<div class="confirm"><span>${n-done?`Masih ada ${n-done} soal belum dijawab. `:''}Kumpulkan jawaban sekarang?</span><span class="row"><button class="btn ghost" id="cancelSubmit">Periksa lagi</button><button class="btn acc" id="doSubmit">Ya, kumpulkan</button></span></div>`:''}`}
   const ok=a===q.ans,fb=(Z.fb||[])[Z.i]||{},baru=Z.just===Z.i;
   const exp=locked?`<div class="fb ${ok?'ok':'no'}${baru?' anim':''}" role="status"><span class="fb-emo" aria-hidden="true">${fb.emo||''}</span><div class="fb-body"><b class="v">${fb.judul||''}</b>${ok&&fb.streak>=2&&fb.emo!=='🔥'?`<span class="streak">🔥 ${fb.streak} benar berturut-turut</span>`:''}${ok?'':`<span class="v2">Jawaban yang benar: <b>${'ABCD'[q.ans]}. ${esc(q.o[q.ans])}</b></span>`}<p>${esc(q.e)}</p></div></div>`:'';
-  const warn=Z.warn?`<div class="warn" role="alert"><span class="warn-emo" aria-hidden="true">⚠️</span><span>Kamu meninggalkan halaman latihan selama <b>${Z.warn} detik</b> (pelanggaran ke-${Z.pelanggaran}). Kalau lebih dari ${BATAS_KELUAR} detik, latihan langsung berakhir dengan nilai 0.</span><button class="btn ghost" id="tutupWarn">Mengerti</button></div>`:'';
-  app.innerHTML=`<section class="sheet">${warn}
-    <div class="qhead"><div class="qmeta"><span class="pill">${MAPEL[Z.mapel]} · ${tp.n}</span><span class="pill k">${KELAS(tp.k)}</span></div>
+  const warnText = Z.warn === 'screenshot'
+    ? `Tangkapan layar (screenshot) dilarang selama latihan! (peringatan ke-${Z.pelanggaran}). Kerjakan soal secara jujur.`
+    : `Kamu meninggalkan halaman latihan selama <b>${Z.warn} detik</b> (pelanggaran ke-${Z.pelanggaran}). Kalau lebih dari ${BATAS_KELUAR} detik, latihan langsung berakhir dengan nilai 0.`;
+  const warn=Z.warn?`<div class="warn" role="alert"><span class="warn-emo" aria-hidden="true">⚠️</span><span>${warnText}</span><button class="btn ghost" id="tutupWarn">Mengerti</button></div>`:'';
+  const wmStamp = `${esc(Z.name)} · ${MAPEL[Z.mapel].toUpperCase()} · ${new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})}`;
+  const wmItems = Array(15).fill(`<span>${wmStamp}</span>`).join('');
+  const wmHtml = `<div class="quiz-wm" aria-hidden="true">${wmItems}</div>`;
+  app.innerHTML=`<section class="sheet sheet-quiz">${wmHtml}${warn}
+    <div class="qhead"><div class="qmeta">${Z.paketName ? `<span class="pill" style="background:#fef3c7;color:#92400e;border:1px solid #f59e0b">🏆 ${esc(Z.paketName)}</span><span class="pill k">${Z.aclRule==='semifinal'?'Aturan Semifinal (+4 / -1 / 0)':'Aturan Penyisihan (+2,5 / 0 / 0)'}</span>` : `<span class="pill">${MAPEL[Z.mapel]} · ${tp.n}</span><span class="pill k">${KELAS(tp.k)}</span>`}</div>
       <div class="row"><button class="sound" id="suara" aria-label="${suaraOn?'Matikan suara':'Nyalakan suara'}" title="${suaraOn?'Matikan suara':'Nyalakan suara'}">${suaraOn?'🔊':'🔇'}</button>
       <span class="timer ${Z.limit&&Z.limit-used<60?'low':''}" id="timer" aria-label="${Z.limit?'Sisa waktu':'Waktu berjalan'}">${fmtTime(Z.limit?Z.limit-used:used)}</span></div></div>
     <div class="progress"><i style="width:${(lat?done:Z.i+1)/n*100}%"></i></div>
@@ -1596,16 +2225,17 @@ async function finish(){
   Z.result={qs,ansr,benar,total:qs.length,skor:Math.round(benar/qs.length*100),per,detik,filter:'semua'};Z.saved=true;
   S.screen='result';render();window.scrollTo(0,0);
   const rec={nama:Z.name,mapel:Z.mapel,mode:Z.mode,benar,total:qs.length,skor:Z.result.skor,detik,perTopik:per,waktu:new Date().toISOString()};
-  if(Z.pelanggaran){rec.pelanggaran=Z.pelanggaran;rec.catatan=`Sempat keluar halaman ${Z.pelanggaran} kali (kurang dari ${BATAS_KELUAR} detik)`}
+  if(Z.pelanggaran){rec.pelanggaran=Z.pelanggaran;rec.catatan=`Terdeteksi ${Z.pelanggaran} kali aktivitas mencurigakan (pindah tab / screenshot)`}
   const ok=await saveRecord(rec);Z.result.savedTo=ok?'db':'lokal';if(S.screen==='result')render();
 }
 
-/* ============ pengawasan: pindah tab / tutup halaman saat latihan ============ */
-const BATAS_KELUAR=30,PKEY='latihsoal-tertunda';
+/* ============ pengawasan: pindah tab / tutup halaman / screenshot saat latihan ============ */
+const BATAS_KELUAR=10,PKEY='latihsoal-tertunda';
 let awayAt=0,awayTimer=null;
 const aktif=()=>Z&&!Z.saved&&S.screen==='quiz';
 function recNol(alasan){return {nama:Z.name,mapel:Z.mapel,mode:Z.mode,benar:0,total:Z.qs.length,skor:0,detik:Math.round((Date.now()-Z.start)/1000),perTopik:{},waktu:new Date().toISOString(),catatan:alasan,pelanggaran:(Z.pelanggaran||0)}}
 async function gugur(alasan){if(!aktif())return;clearInterval(timerId);clearTimeout(awayTimer);
+  document.getElementById('screenShield')?.classList.remove('active');
   const rec=recNol(alasan);Z.saved=true;
   Z.result={qs:Z.qs,ansr:Z.ansr,benar:0,total:Z.qs.length,skor:0,per:{},detik:rec.detik,filter:'semua',gugur:alasan};
   S.screen='result';render();window.scrollTo(0,0);
@@ -1620,6 +2250,32 @@ window.addEventListener('beforeunload',e=>{if(aktif()){e.preventDefault();e.retu
 window.addEventListener('pagehide',()=>{if(!aktif())return;const rec=recNol('Menutup atau memuat ulang halaman saat latihan');Z.saved=true;
   let terkirim=false;try{if(apiOk&&navigator.sendBeacon)terkirim=navigator.sendBeacon(API,new Blob([JSON.stringify(rec)],{type:'application/json'}))}catch(e){}
   if(!terkirim)ls.set(PKEY,JSON.stringify(rec))});
+
+// pelindung anti-screenshot: samarkan layar saat window kehilangan fokus (Snipping Tool, tab lain, minimize)
+window.addEventListener('blur',()=>{if(aktif()){const sh=document.getElementById('screenShield');if(sh)sh.classList.add('active')}});
+window.addEventListener('focus',()=>{const sh=document.getElementById('screenShield');if(sh)sh.classList.remove('active')});
+
+// deteksi tombol PrintScreen / Screenshot OS
+window.addEventListener('keyup',e=>{
+  if(!aktif())return;
+  if(e.key==='PrintScreen'||e.code==='PrintScreen'||e.keyCode===44){
+    try{if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText('')}catch(err){}
+    const sh=document.getElementById('screenShield');
+    if(sh){
+      sh.classList.add('active');
+      setTimeout(()=>{if(!document.hidden&&document.hasFocus())sh.classList.remove('active')},1600);
+    }
+    Z.warn='screenshot';
+    Z.pelanggaran=(Z.pelanggaran||0)+1;
+    render();
+  }
+});
+
+// cegah klik kanan dan copy-paste teks saat latihan aktif
+document.addEventListener('contextmenu',e=>{if(aktif())e.preventDefault()});
+document.addEventListener('copy',e=>{if(aktif()){e.preventDefault();try{if(e.clipboardData)e.clipboardData.setData('text/plain','')}catch(err){}}});
+document.addEventListener('cut',e=>{if(aktif())e.preventDefault()});
+
 // nilai 0 yang belum sempat terkirim waktu halaman ditutup
 (async()=>{const p=ls.get(PKEY);if(!p)return;try{localStorage.removeItem(PKEY)}catch(e){}
   try{await new Promise(r=>setTimeout(r,1500));await saveRecord(JSON.parse(p));refresh()}catch(e){}})();
@@ -1636,7 +2292,7 @@ function renderResult(){const r=Z.result;
     <div class="score"><div class="badge${r.gugur?' gugur':''}">${r.gugur?'<span class="badge-emo">⛔</span>':lencana(r.skor)}</div><div class="big">${r.skor}<small>/100</small></div>
       <div class="verdict"><h2>${msgT}, ${esc(Z.name)}${r.gugur?'':'!'} ${msgE}</h2><div class="hint">${sub}</div>
       <div class="stats"><span>Benar <b>${r.benar}</b> dari <b>${r.total}</b></span><span>Waktu <b>${fmtTime(r.detik)}</b></span><span>${MAPEL[Z.mapel]} · ${Z.mode==='latihan'?'Latihan santai':'Ujian berwaktu'}</span></div></div></div>
-    <div class="row" style="margin-top:16px"><button class="btn acc" id="again">Ulangi dengan soal baru</button><button class="btn ghost" id="home">Ganti topik</button><button class="btn ghost" data-go="rekap">Lihat rekap</button></div>
+    <div class="row" style="margin-top:16px"><button class="btn acc" id="again">${Z.aclRule?'Ulangi paket ini':'Ulangi dengan soal baru'}</button>${Z.aclRule?'<button class="btn primary" data-go="sofiyah">Pilih paket Sofiyah lain ➔</button>':''}<button class="btn ghost" id="home">Ganti topik</button><button class="btn ghost" data-go="rekap">Lihat rekap</button></div>
     <p class="note">${r.savedTo==='db'?'Nilai sudah tersimpan di rekap (bisa dilihat dari perangkat lain).':r.savedTo==='lokal'?'Nilai tersimpan di perangkat ini saja.':'Menyimpan nilai…'}</p>
     ${bars?`<div class="sec"><h2>Hasil per topik</h2><div class="bars">${bars}</div></div>`:''}
     <div class="sec"><div class="row" style="justify-content:space-between"><h2>Pembahasan</h2>
@@ -1677,7 +2333,13 @@ function renderRekap(){
 }
 
 /* ============ events ============ */
-document.addEventListener('click',e=>{const b=e.target.closest('button');
+document.addEventListener('click',e=>{
+  if(e.target.closest('#btnShieldFocus')||e.target.closest('#screenShield')){
+    window.focus();
+    document.getElementById('screenShield')?.classList.remove('active');
+    return;
+  }
+  const b=e.target.closest('button');
   if(e.target.dataset.pinclose || (b && b.dataset.pinclose)){S.pinModal=false;S.pinErr='';render();return}
   if(b && b.id==='lockRekap'){sessionStorage.removeItem('rekap_pin_ok');S.screen='home';S.armed=null;render();window.scrollTo(0,0);return}
   if(!b)return;
@@ -1712,7 +2374,10 @@ document.addEventListener('click',e=>{const b=e.target.closest('button');
   }
   if(S.screen==='result'){
     if(b.dataset.rf){Z.result.filter=b.dataset.rf;render();return}
-    if(b.id==='again'){S.mapel=Z.mapel;S.mode=Z.mode;S.sheet={ids:Z.topics};return startQuiz()}
+    if(b.id==='again'){
+      if(Z.aclRule!==undefined && Z.paketIdx!==undefined){ return startSofiyahPaket(Z.paketIdx); }
+      S.mapel=Z.mapel;S.mode=Z.mode;S.sheet={ids:Z.topics};return startQuiz();
+    }
     if(b.id==='home'){S.screen='home';render();window.scrollTo(0,0);return}
   }
   if(S.screen==='rekap'&&b.id==='resetAll'){if(S.armed!=='__all'){S.armed='__all';render();return}
@@ -1721,7 +2386,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('button');
   if(S.screen==='rekap'&&b.dataset.del){const id=b.dataset.del;if(S.armed===id){const r=records.find(x=>x.id===id);S.armed=null;if(r)deleteRecord(r);render()}else{S.armed=id;render()}return}
 });
 let leaveArmed=false;
-function confirmLeave(){if(leaveArmed){leaveArmed=false;clearInterval(timerId);if(aktif()){const rec=recNol('Meninggalkan latihan sebelum selesai');Z.saved=true;saveRecord(rec)}Z=null;return true}
+function confirmLeave(){if(leaveArmed){leaveArmed=false;clearInterval(timerId);document.getElementById('screenShield')?.classList.remove('active');if(aktif()){const rec=recNol('Meninggalkan latihan sebelum selesai');Z.saved=true;saveRecord(rec)}Z=null;return true}
   leaveArmed=true;const f=app.querySelector('.qfoot');if(f&&!document.getElementById('leaveNote')){const n=document.createElement('div');n.className='confirm';n.id='leaveNote';n.innerHTML=`<span>Latihan belum selesai. Kalau keluar sekarang, nilainya dicatat <b>0</b>. ${Z&&Z.mode==='latihan'?'Pakai tombol <b>Akhiri latihan</b> untuk menyimpan nilai soal yang sudah dijawab. ':''}Klik tab sekali lagi untuk tetap keluar.</span>`;f.after(n)}
   setTimeout(()=>{leaveArmed=false},5000);return false}
 document.addEventListener('change',e=>{if(e.target.id==='rkName'){S.rekapName=e.target.value;render()}if(e.target.id==='rkMapel'){S.rekapMapel=e.target.value;render()}});
@@ -1737,7 +2402,7 @@ document.addEventListener('submit',e=>{
       render();
       window.scrollTo(0,0);
     }else{
-      S.pinErr='PIN salah. Akses khusus Mas Syuro.';
+      S.pinErr='PIN salah. Akses khusus orang tua.';
       render();
       const inp=document.getElementById('pinInput');
       if(inp){inp.focus();inp.select()}
@@ -1758,7 +2423,17 @@ document.addEventListener('keydown',e=>{
     if(S.screen==='home'&&S.sheet){S.sheet=null;render();return}
   }
 });
-document.addEventListener('keydown',e=>{if(S.screen!=='quiz'||e.target.tagName==='INPUT')return;const k=e.key.toLowerCase();
+document.addEventListener('keydown',e=>{
+  if(!aktif())return;
+  const k=e.key.toLowerCase();
+  // Cegah shortcut screenshot, inspect, print, copy, save, view-source
+  if(e.key==='F12' ||
+     (e.ctrlKey && ['p','u','s','c','a','x'].includes(k)) ||
+     (e.ctrlKey && e.shiftKey && ['i','j','c','s'].includes(k)) ||
+     (e.metaKey && ['p','u','s','c','a'].includes(k))){
+    e.preventDefault();e.stopPropagation();return;
+  }
+  if(e.target.tagName==='INPUT')return;
   const map={'1':0,'2':1,'3':2,'4':3,a:0,b:1,c:2,d:3};
   if(k in map&&!(Z.mode==='latihan'&&Z.ansr[Z.i]!==null)){answer(map[k]);return}
   if(e.key==='Enter'){const n=document.getElementById('next')||document.getElementById('nextU');if(n){e.preventDefault();n.click()}}
